@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 
 using System;
 
 using System.Collections;
+=======
+>>>>>>> parent of 055a2d0 (.)
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,8 +13,11 @@ public class HostMovement : NetworkBehaviour
 {
     private Rigidbody hostRb;
     private PlayerInput playerInput;
+<<<<<<< HEAD
 
     private bool canJump = true;
+=======
+>>>>>>> parent of 055a2d0 (.)
 
     public GameObject pauseMenu;
     private bool isGrounded = true;
@@ -26,14 +32,9 @@ public class HostMovement : NetworkBehaviour
     public float movementSpeed = 5f;
 
     [SerializeField]
-    [Tooltip("Normal jump power")]
+    [Tooltip("Normal jump power (heavy jump is X2")]
     [Range(0f, 100f)]
     private float jumpPower = 5f;
-
-    [SerializeField]
-    [Tooltip("Super jump power (4x jump power)")]
-    [Range(0f, 100f)]
-    private float superJumpPower = 20f;
 
     [SerializeField]
     [Tooltip("Host attack power")]
@@ -54,7 +55,7 @@ public class HostMovement : NetworkBehaviour
     {
         hostRb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-
+        
     }
 
     // Update is called once per frame
@@ -68,6 +69,7 @@ public class HostMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+<<<<<<< HEAD
 
 
 
@@ -76,27 +78,31 @@ public class HostMovement : NetworkBehaviour
 
        
 
+=======
+        
+>>>>>>> parent of 055a2d0 (.)
     }
 
     public void Move(InputAction.CallbackContext context)
     {
 
-        Debug.Log("I moved " + context.phase);
-        Vector2 inputVector = context.ReadValue<Vector2>();
-        hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed, ForceMode.Force);
-
+            Debug.Log("I moved " + context.phase);
+            Vector2 inputVector = context.ReadValue<Vector2>();
+            hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed, ForceMode.Force);
+       
     }
     public void Sprint(InputAction.CallbackContext context)
     {
 
     }
-    //The controls for the Host facing direction
+   //The controls for the Host facing direction
     public void Facing(InputAction.CallbackContext context)
     {
 
     }
     public void Jump(InputAction.CallbackContext context)
     {
+<<<<<<< HEAD
 
         if (context.performed && canJump)
         {
@@ -111,6 +117,12 @@ public class HostMovement : NetworkBehaviour
                 Debug.Log("I jumped " + context.phase);
             }
 
+=======
+        if (context.performed)
+        {
+            hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            Debug.Log("I jumped " + context.phase);
+>>>>>>> parent of 055a2d0 (.)
         }
        
     }
@@ -118,12 +130,13 @@ public class HostMovement : NetworkBehaviour
     {
 
     }
-    public void HeavyAttack(InputAction.CallbackContext context)
+    public void HeavyAttack(InputAction.CallbackContext context) 
     {
-
+        
     }
     public void SuperJump(InputAction.CallbackContext context)
     {
+<<<<<<< HEAD
 
         if (context.performed && canJump)
 
@@ -164,6 +177,13 @@ public class HostMovement : NetworkBehaviour
         canJump = true;
     }
 
+=======
+        if(context.performed)
+        {
+            hostRb.AddForce(Vector3.up * jumpPower * 4, ForceMode.Impulse);
+        }
+    }
+>>>>>>> parent of 055a2d0 (.)
     public void Block(InputAction.CallbackContext context)
     {
 
@@ -212,6 +232,6 @@ public class HostMovement : NetworkBehaviour
             Debug.Log("Paused " + context.phase);
         }
 
-
+        
     }
 }

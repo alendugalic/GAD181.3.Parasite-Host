@@ -107,6 +107,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
 <<<<<<< Updated upstream:Assets/Prefabs/Player1.prefab
 --- !u!1 &7108575651044445376
 GameObject:
@@ -139,6 +140,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 429855674632439057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
 --- !u!1 &8604955317281092078
 =======
 --- !u!1 &6799067737516472215
@@ -178,10 +181,13 @@ Transform:
   m_Children:
 <<<<<<< Updated upstream:Assets/Prefabs/Player1.prefab
   - {fileID: 8552574667206968594}
+<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
   - {fileID: 2630004262304658617}
 =======
   - {fileID: 5575507211544164137}
 >>>>>>> Stashed changes:Assets/Prefabs/Player1 1.prefab
+=======
+>>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8619539522434842796
@@ -218,7 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   jumpPower: 5
-  superJumpPower: 20
   attackPower: 5
   heavyAttackCooldown: 5
   superJumpCooldown: 5
@@ -377,6 +382,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a6d8a0c9-e680-4a72-b55c-c807371ffc1f
     m_ActionName: UI/Submit[/DualShock4GamepadHID/buttonSouth]
+<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3c02a4aa-0a4f-4e09-b2da-6d5ad1e10fe7
@@ -405,6 +411,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d3025ee6-4232-427a-864b-27d0e8b1db24
     m_ActionName: Player-Host/Sprint[/DualShock4GamepadHID/leftStickPress]
+=======
+>>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player-Host
