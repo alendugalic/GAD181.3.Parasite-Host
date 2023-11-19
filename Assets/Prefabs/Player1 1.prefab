@@ -107,45 +107,11 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
-<<<<<<< Updated upstream:Assets/Prefabs/Player1.prefab
---- !u!1 &7108575651044445376
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2630004262304658617}
-  m_Layer: 0
-  m_Name: TargetFollow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2630004262304658617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7108575651044445376}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 429855674632439057}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
->>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
+
 --- !u!1 &8604955317281092078
 =======
 --- !u!1 &6799067737516472215
->>>>>>> Stashed changes:Assets/Prefabs/Player1 1.prefab
+
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,15 +145,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-<<<<<<< Updated upstream:Assets/Prefabs/Player1.prefab
-  - {fileID: 8552574667206968594}
-<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
-  - {fileID: 2630004262304658617}
-=======
-  - {fileID: 5575507211544164137}
->>>>>>> Stashed changes:Assets/Prefabs/Player1 1.prefab
-=======
->>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
+ 
+
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8619539522434842796
@@ -382,18 +341,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a6d8a0c9-e680-4a72-b55c-c807371ffc1f
     m_ActionName: UI/Submit[/DualShock4GamepadHID/buttonSouth]
-<<<<<<< HEAD:Assets/Prefabs/Player1 1.prefab
+
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3c02a4aa-0a4f-4e09-b2da-6d5ad1e10fe7
     m_ActionName: Player-Host/Eat[/DualShock4GamepadHID/buttonNorth]
   - m_PersistentCalls:
       m_Calls:
-<<<<<<< Updated upstream:Assets/Prefabs/Player1.prefab
-      - m_Target: {fileID: -620323727574335261}
-=======
       - m_Target: {fileID: 5771698959397036470}
->>>>>>> Stashed changes:Assets/Prefabs/Player1 1.prefab
         m_TargetAssemblyTypeName: HostMovement, Assembly-CSharp
         m_MethodName: SuperJump
         m_Mode: 0
@@ -412,7 +367,7 @@ MonoBehaviour:
     m_ActionId: d3025ee6-4232-427a-864b-27d0e8b1db24
     m_ActionName: Player-Host/Sprint[/DualShock4GamepadHID/leftStickPress]
 =======
->>>>>>> parent of 055a2d0 (.):Assets/Prefabs/Player1.prefab
+
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player-Host

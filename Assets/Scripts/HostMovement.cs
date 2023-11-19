@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 
 using System;
-
 using System.Collections;
-=======
->>>>>>> parent of 055a2d0 (.)
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,11 +9,9 @@ public class HostMovement : NetworkBehaviour
 {
     private Rigidbody hostRb;
     private PlayerInput playerInput;
-<<<<<<< HEAD
+
 
     private bool canJump = true;
-=======
->>>>>>> parent of 055a2d0 (.)
 
     public GameObject pauseMenu;
     private bool isGrounded = true;
@@ -32,9 +26,14 @@ public class HostMovement : NetworkBehaviour
     public float movementSpeed = 5f;
 
     [SerializeField]
-    [Tooltip("Normal jump power (heavy jump is X2")]
+    [Tooltip("Normal jump power")]
     [Range(0f, 100f)]
     private float jumpPower = 5f;
+
+    [SerializeField]
+    [Tooltip("Super jump power")]
+    [Range(0f, 100f)]
+    private float superJumpPower = 20f;
 
     [SerializeField]
     [Tooltip("Host attack power")]
@@ -69,7 +68,6 @@ public class HostMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-<<<<<<< HEAD
 
 
 
@@ -78,9 +76,7 @@ public class HostMovement : NetworkBehaviour
 
        
 
-=======
-        
->>>>>>> parent of 055a2d0 (.)
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -102,8 +98,6 @@ public class HostMovement : NetworkBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-<<<<<<< HEAD
-
         if (context.performed && canJump)
         {
             hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
@@ -117,12 +111,12 @@ public class HostMovement : NetworkBehaviour
                 Debug.Log("I jumped " + context.phase);
             }
 
-=======
-        if (context.performed)
-        {
-            hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            Debug.Log("I jumped " + context.phase);
->>>>>>> parent of 055a2d0 (.)
+            if (context.performed)
+            {
+                hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                Debug.Log("I jumped " + context.phase);
+
+            }
         }
        
     }
@@ -136,32 +130,28 @@ public class HostMovement : NetworkBehaviour
     }
     public void SuperJump(InputAction.CallbackContext context)
     {
-<<<<<<< HEAD
 
-        if (context.performed && canJump)
+        if (context.performed && isGrounded)
 
-            if (context.performed && isGrounded)
+        {
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                Vector3 mousePosition = Mouse.current.position.ReadValue();
-                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                {
-                    Vector3 jumpDirection = (hit.point - transform.position).normalized;
-                    hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
+                Vector3 jumpDirection = (hit.point - transform.position).normalized;
+                hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
 
 
-                    canJump = false;
-                    StartCoroutine(SuperJumpCooldown());
+                canJump = false;
+                StartCoroutine(SuperJumpCooldown());
 
-                    isGrounded = false;
-                    StartCoroutine(SuperJumpCooldown());
+                isGrounded = false;
+                StartCoroutine(SuperJumpCooldown());
 
-                }
             }
-
+        }
     }
 
     private IEnumerator SuperJumpCooldown()
@@ -177,13 +167,6 @@ public class HostMovement : NetworkBehaviour
         canJump = true;
     }
 
-=======
-        if(context.performed)
-        {
-            hostRb.AddForce(Vector3.up * jumpPower * 4, ForceMode.Impulse);
-        }
-    }
->>>>>>> parent of 055a2d0 (.)
     public void Block(InputAction.CallbackContext context)
     {
 
@@ -232,6 +215,5 @@ public class HostMovement : NetworkBehaviour
             Debug.Log("Paused " + context.phase);
         }
 
-        
     }
 }
