@@ -1,7 +1,6 @@
-<<<<<<< Updated upstream
-=======
+
 using System;
->>>>>>> Stashed changes
+
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -11,13 +10,13 @@ public class HostMovement : NetworkBehaviour
 {
     private Rigidbody hostRb;
     private PlayerInput playerInput;
-<<<<<<< Updated upstream
+
     private bool canJump = true;
-=======
+
     public GameObject pauseMenu;
     private bool isGrounded = true;
     private bool isPaused = false;
->>>>>>> Stashed changes
+
 
     [Header("HOST PRIMARY STATS")]
 
@@ -69,14 +68,14 @@ public class HostMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-<<<<<<< Updated upstream
 
-=======
+
+
         Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
         hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed, ForceMode.Force);
 
        
->>>>>>> Stashed changes
+
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -98,20 +97,22 @@ public class HostMovement : NetworkBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-<<<<<<< Updated upstream
+
         if (context.performed && canJump)
         {
             hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             canJump = false;
-=======
-        if (context.performed && isGrounded)
-        {
-            hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            isGrounded = false;
->>>>>>> Stashed changes
-            Debug.Log("I jumped " + context.phase);
-        }
 
+            if (context.performed && isGrounded)
+            {
+                hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                isGrounded = false;
+
+                Debug.Log("I jumped " + context.phase);
+            }
+
+        }
+       
     }
     public void Attack(InputAction.CallbackContext context)
     {
@@ -123,38 +124,37 @@ public class HostMovement : NetworkBehaviour
     }
     public void SuperJump(InputAction.CallbackContext context)
     {
-<<<<<<< Updated upstream
+
         if (context.performed && canJump)
-=======
-        if (context.performed && isGrounded)
->>>>>>> Stashed changes
-        {
-            Vector3 mousePosition = Mouse.current.position.ReadValue();
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (context.performed && isGrounded)
+
             {
-                Vector3 jumpDirection = (hit.point - transform.position).normalized;
-                hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
+                Vector3 mousePosition = Mouse.current.position.ReadValue();
+                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-<<<<<<< Updated upstream
-                canJump = false;
-                StartCoroutine(SuperJumpCooldown());
-=======
-                isGrounded = false;
-                StartCoroutine(SuperJumpCooldown());
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Vector3 jumpDirection = (hit.point - transform.position).normalized;
+                    hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
 
->>>>>>> Stashed changes
+
+                    canJump = false;
+                    StartCoroutine(SuperJumpCooldown());
+
+                    isGrounded = false;
+                    StartCoroutine(SuperJumpCooldown());
+
+                }
             }
-        }
 
     }
 
     private IEnumerator SuperJumpCooldown()
     {
         yield return new WaitForSeconds(superJumpCooldown);
-<<<<<<< Updated upstream
+
         canJump = true;
     }
 
@@ -163,12 +163,7 @@ public class HostMovement : NetworkBehaviour
     {
         canJump = true;
     }
-=======
-        isGrounded = true;
-    }
-   
 
->>>>>>> Stashed changes
     public void Block(InputAction.CallbackContext context)
     {
 
@@ -219,10 +214,4 @@ public class HostMovement : NetworkBehaviour
 
 
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        isGrounded = true;
-    }
-
 }
