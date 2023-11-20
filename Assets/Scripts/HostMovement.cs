@@ -1,12 +1,33 @@
 
 using System;
 using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HostMovement : NetworkBehaviour
 {
+    private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
+        new MyCustomData
+        {
+            _int =55,
+            _bool = true,
+        }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    
+    public struct MyCustomData : INetworkSerializable
+    {
+        public int  _int;
+        public bool _bool;
+        public FixedString128Bytes  message;
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref _int);
+            serializer.SerializeValue(ref _bool);
+            serializer.SerializeValue(ref message);
+        }
+    }
     private Rigidbody hostRb;
     private PlayerInput playerInput;
 
@@ -50,6 +71,10 @@ public class HostMovement : NetworkBehaviour
     [Range(0f, 100f)]
     private float superJumpCooldown = 5f;
 
+    //the transform lis used to spawn objects for both hold and client
+    [SerializeField]
+    private Transform hostDirections;
+
     private void Awake()
     {
         hostRb = GetComponent<Rigidbody>();
@@ -57,11 +82,37 @@ public class HostMovement : NetworkBehaviour
         
     }
 
+    public override void OnNetworkSpawn()
+    {
+        randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
+        {
+            Debug.Log(OwnerClientId + "; " + newValue._int + newValue._bool);
+        };
+    }
+
     // Update is called once per frame
     void Update()
     {
+       
+
         if (!IsOwner) return;
 
+       if (Input.GetKeyDown(KeyCode.P))
+        {
+            //how to spawn on both Host and client
+           Transform hostDirectionsTransform = Instantiate(hostDirections);
+            hostDirectionsTransform.GetComponent<NetworkObject>().Spawn(true);
+            //use a normal destroy to despawn the object or use .Despawn
+
+
+            randomNumber.Value = new MyCustomData
+            {
+                _bool = false,
+                _int = 10,
+                message = "forward",
+                
+            };
+        }
 
 
     }
@@ -185,7 +236,7 @@ public class HostMovement : NetworkBehaviour
     }
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             if (isPaused)
             {
