@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -11,15 +12,15 @@ public class HostMovement : NetworkBehaviour
     private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
         new MyCustomData
         {
-            _int =55,
+            _int = 55,
             _bool = true,
-        }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    
+        }, NetworkVariableReadPermission.Everyone/*, NetworkVariableWritePermission.Owner*/);
+
     public struct MyCustomData : INetworkSerializable
     {
-        public int  _int;
+        public int _int;
         public bool _bool;
-        public FixedString128Bytes  message;
+        public FixedString128Bytes message;
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
@@ -37,7 +38,11 @@ public class HostMovement : NetworkBehaviour
     public GameObject pauseMenu;
     private bool isGrounded = true;
     private bool isPaused = false;
-
+    private bool isSprinting = false;
+    private bool isMoving = false;
+    private bool canSprint = true;
+    private float sprintCooldown = 5f;
+    public float lookSensitivity = 10f;
 
     [Header("HOST PRIMARY STATS")]
 
@@ -45,6 +50,12 @@ public class HostMovement : NetworkBehaviour
     [Tooltip("On ground Movespeed")]
     [Range(0f, 100f)]
     public float movementSpeed = 5f;
+
+    [SerializeField]
+    [Tooltip("Host Run speed")]
+    [Range(0f, 100f)]
+    public float runSpeed = 10f;
+
 
     [SerializeField]
     [Tooltip("Normal jump power")]
@@ -74,12 +85,14 @@ public class HostMovement : NetworkBehaviour
     //the transform lis used to spawn objects for both hold and client
     [SerializeField]
     private Transform hostDirections;
+    private Vector2 lookInput = Vector2.zero;
+    public Transform playerCamera;
 
     private void Awake()
     {
         hostRb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-        
+
     }
 
     public override void OnNetworkSpawn()
@@ -93,14 +106,14 @@ public class HostMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
 
         if (!IsOwner) return;
 
-       if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             //how to spawn on both Host and client
-           Transform hostDirectionsTransform = Instantiate(hostDirections);
+            Transform hostDirectionsTransform = Instantiate(hostDirections);
             hostDirectionsTransform.GetComponent<NetworkObject>().Spawn(true);
             //use a normal destroy to despawn the object or use .Despawn
 
@@ -110,41 +123,106 @@ public class HostMovement : NetworkBehaviour
                 _bool = false,
                 _int = 10,
                 message = "forward",
-                
+
             };
         }
 
 
     }
 
+    private void LateUpdate()
+    {
+        lookInput = playerInput.actions["Look"].ReadValue<Vector2>();
+
+        if (lookInput != Vector2.zero)
+        {
+            float horizontalRotation = lookInput.x * lookSensitivity * Time.fixedDeltaTime;
+            float verticalRotation = lookInput.y * lookSensitivity * Time.fixedDeltaTime;
+
+            transform.Rotate(Vector3.up, horizontalRotation);
+            playerCamera.Rotate(Vector3.left, verticalRotation);
+        }
+    }
+
     private void FixedUpdate()
     {
-
-
-
         Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
-        hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed, ForceMode.Force);
 
-       
+        if (inputVector != Vector2.zero)
+        {
 
+
+            Vector3 forwardDirection = transform.forward;
+
+            hostRb.AddForce(new Vector3(forwardDirection.x * inputVector.y, 0, forwardDirection.z * inputVector.y) * movementSpeed, ForceMode.Force);
+            isMoving = true;
+        }
+        else
+        {
+            hostRb.velocity = Vector3.zero;
+            isMoving = false;
+            isSprinting = false;
+        }
 
     }
 
-    public void Move(InputAction.CallbackContext context)
+        public void Move(InputAction.CallbackContext context)
     {
 
-            Debug.Log("I moved " + context.phase);
-            Vector2 inputVector = context.ReadValue<Vector2>();
-            hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * movementSpeed, ForceMode.Force);
-       
+        Debug.Log("I moved " + context.phase);
+        Vector2 inputVector = context.ReadValue<Vector2>();
+        Vector3 forwardDirection = transform.forward;
+        hostRb.AddForce(new Vector3(forwardDirection.x * inputVector.y, 0, forwardDirection.z * inputVector.y)* movementSpeed, ForceMode.Force);
+        isMoving = true;
+
     }
     public void Sprint(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            Debug.Log("Im running" + context.phase);
+            isSprinting = true;
+            UpdateMovementSpeed();
+        }
 
-    }
-   //The controls for the Host facing direction
-    public void Facing(InputAction.CallbackContext context)
+        else if (context.canceled)
+        {
+            isSprinting = false;
+            UpdateMovementSpeed();
+        }
+        canSprint = false;
+        StartCoroutine(SprintCooldown());
+
+    } 
+
+    private void UpdateMovementSpeed()
     {
+        float currentSpeed = isSprinting ? runSpeed : movementSpeed;
+        Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
+        hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * currentSpeed, ForceMode.Force);
+    }
+    private IEnumerator SprintCooldown()
+    {
+        Debug.Log("Sprint on Cooldown");
+        yield return new WaitForSeconds(sprintCooldown);
+        canSprint = false;
+    }
+
+   //The controls for the Host facing direction
+    public void Look(InputAction.CallbackContext context)
+    {
+        if (playerCamera == null)
+        {
+            return;
+        }
+
+        Vector2 lookInput = context.ReadValue<Vector2>();
+        float horizontalRotation = lookInput.x * lookSensitivity * Time.fixedDeltaTime;
+        float verticalRotation = lookInput.y * lookSensitivity * Time.fixedDeltaTime;
+
+        transform.Rotate(Vector3.up, horizontalRotation);
+        playerCamera.Rotate(Vector3.left, verticalRotation);
+
 
     }
     public void Jump(InputAction.CallbackContext context)

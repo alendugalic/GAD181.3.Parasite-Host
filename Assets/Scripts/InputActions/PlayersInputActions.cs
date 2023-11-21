@@ -40,7 +40,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""0f63c4a9-f393-4d57-a8f2-97b5ce9a7b3f"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -123,22 +123,11 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""id"": ""d3025ee6-4232-427a-864b-27d0e8b1db24"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4c5212e5-c944-4f22-bcfe-fc962b434851"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""52190b08-377e-44d3-9cbb-a890e062eecd"",
@@ -196,17 +185,6 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""16f8f060-5e08-456a-a42b-b2b0029b1ef2"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""81b2a07e-7bce-4c5f-8b68-1fa0a053656b"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -257,6 +235,72 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""9bdbf1e1-78f1-4e6a-9717-38a177224f6e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a14bd82d-1f0e-40f2-98a3-e48f2f4f38c2"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e31b96b5-3236-4889-a300-6b2e9e967e82"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""0e07934c-4d33-4762-8a54-10f8b93e1710"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""10615144-8941-45fd-a072-66902bc1c8e8"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3b5b974-edd7-4b84-a475-c55c893c1662"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -431,6 +475,258 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player-Parasite"",
+            ""id"": ""c71c78d8-2f0c-4469-b05a-b65e2165da2d"",
+            ""actions"": [
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ebbec2f-763f-4c63-9bad-80acdb963f6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveInstructions"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""043e8bd1-b19a-4e23-965c-12ea9c7ce1e6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MapSave"",
+                    ""type"": ""Button"",
+                    ""id"": ""52a020be-829e-4a86-9c03-478855698ddd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetMark"",
+                    ""type"": ""Button"",
+                    ""id"": ""84db465b-8dbd-46f5-a082-29e2f3bc6349"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7ca5d89-8360-4a28-80c0-f59dadee191e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8b2b96a-21d5-493c-a5dd-f1ff092a8744"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeVisionF"",
+                    ""type"": ""Button"",
+                    ""id"": ""130fabbe-d258-43a4-84c9-b064a8681cf2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeVisionB"",
+                    ""type"": ""Button"",
+                    ""id"": ""caf0538d-c106-44f0-bc5a-ad5a0ce06a9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MarkerOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a2d93b2-f028-4c0a-868c-f661a23ccb4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MarkerTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""59e7badd-6811-46a1-8a97-76c7ab3dc610"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7597f6aa-ec8e-4104-8a80-aebf34f21e54"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62034e9c-4122-4a4b-85fa-e7e6b85cb11b"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapSave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e58b431b-af40-46cc-93fb-f2d610f01bca"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetMark"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37543d3a-4242-41b0-b584-36d810eeeee0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab5d4656-fb48-4d25-b7e6-ea647c81b01e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad8b8714-4cda-455c-9fe9-62caaf857f62"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeVisionF"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70731979-ca51-4e2c-b570-8cc151646126"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeVisionB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2c2ef79-67b0-46c2-9bfc-df85fcd78af6"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MarkerOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c15543a2-40a7-4762-8833-e3f57e8a1cb4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MarkerTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""a0f818a2-1d5e-48f9-af55-42b9a8796007"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInstructions"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2b049ab6-2b58-46a1-9660-373a7ffb8079"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInstructions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""21704431-9a46-41d1-8e5f-c679c18680fb"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInstructions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8047f395-9090-49b5-ad2c-183b1b18691d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInstructions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3e6ad6a5-e8b3-461e-917f-ae7721224ec8"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInstructions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -469,6 +765,18 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Player-Parasite
+        m_PlayerParasite = asset.FindActionMap("Player-Parasite", throwIfNotFound: true);
+        m_PlayerParasite_Look = m_PlayerParasite.FindAction("Look", throwIfNotFound: true);
+        m_PlayerParasite_MoveInstructions = m_PlayerParasite.FindAction("MoveInstructions", throwIfNotFound: true);
+        m_PlayerParasite_MapSave = m_PlayerParasite.FindAction("MapSave", throwIfNotFound: true);
+        m_PlayerParasite_TargetMark = m_PlayerParasite.FindAction("TargetMark", throwIfNotFound: true);
+        m_PlayerParasite_SlowDown = m_PlayerParasite.FindAction("SlowDown", throwIfNotFound: true);
+        m_PlayerParasite_Run = m_PlayerParasite.FindAction("Run", throwIfNotFound: true);
+        m_PlayerParasite_ChangeVisionF = m_PlayerParasite.FindAction("ChangeVisionF", throwIfNotFound: true);
+        m_PlayerParasite_ChangeVisionB = m_PlayerParasite.FindAction("ChangeVisionB", throwIfNotFound: true);
+        m_PlayerParasite_MarkerOne = m_PlayerParasite.FindAction("MarkerOne", throwIfNotFound: true);
+        m_PlayerParasite_MarkerTwo = m_PlayerParasite.FindAction("MarkerTwo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -746,6 +1054,124 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Player-Parasite
+    private readonly InputActionMap m_PlayerParasite;
+    private List<IPlayerParasiteActions> m_PlayerParasiteActionsCallbackInterfaces = new List<IPlayerParasiteActions>();
+    private readonly InputAction m_PlayerParasite_Look;
+    private readonly InputAction m_PlayerParasite_MoveInstructions;
+    private readonly InputAction m_PlayerParasite_MapSave;
+    private readonly InputAction m_PlayerParasite_TargetMark;
+    private readonly InputAction m_PlayerParasite_SlowDown;
+    private readonly InputAction m_PlayerParasite_Run;
+    private readonly InputAction m_PlayerParasite_ChangeVisionF;
+    private readonly InputAction m_PlayerParasite_ChangeVisionB;
+    private readonly InputAction m_PlayerParasite_MarkerOne;
+    private readonly InputAction m_PlayerParasite_MarkerTwo;
+    public struct PlayerParasiteActions
+    {
+        private @PlayersInputActions m_Wrapper;
+        public PlayerParasiteActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Look => m_Wrapper.m_PlayerParasite_Look;
+        public InputAction @MoveInstructions => m_Wrapper.m_PlayerParasite_MoveInstructions;
+        public InputAction @MapSave => m_Wrapper.m_PlayerParasite_MapSave;
+        public InputAction @TargetMark => m_Wrapper.m_PlayerParasite_TargetMark;
+        public InputAction @SlowDown => m_Wrapper.m_PlayerParasite_SlowDown;
+        public InputAction @Run => m_Wrapper.m_PlayerParasite_Run;
+        public InputAction @ChangeVisionF => m_Wrapper.m_PlayerParasite_ChangeVisionF;
+        public InputAction @ChangeVisionB => m_Wrapper.m_PlayerParasite_ChangeVisionB;
+        public InputAction @MarkerOne => m_Wrapper.m_PlayerParasite_MarkerOne;
+        public InputAction @MarkerTwo => m_Wrapper.m_PlayerParasite_MarkerTwo;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerParasite; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerParasiteActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerParasiteActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Add(instance);
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @MoveInstructions.started += instance.OnMoveInstructions;
+            @MoveInstructions.performed += instance.OnMoveInstructions;
+            @MoveInstructions.canceled += instance.OnMoveInstructions;
+            @MapSave.started += instance.OnMapSave;
+            @MapSave.performed += instance.OnMapSave;
+            @MapSave.canceled += instance.OnMapSave;
+            @TargetMark.started += instance.OnTargetMark;
+            @TargetMark.performed += instance.OnTargetMark;
+            @TargetMark.canceled += instance.OnTargetMark;
+            @SlowDown.started += instance.OnSlowDown;
+            @SlowDown.performed += instance.OnSlowDown;
+            @SlowDown.canceled += instance.OnSlowDown;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @ChangeVisionF.started += instance.OnChangeVisionF;
+            @ChangeVisionF.performed += instance.OnChangeVisionF;
+            @ChangeVisionF.canceled += instance.OnChangeVisionF;
+            @ChangeVisionB.started += instance.OnChangeVisionB;
+            @ChangeVisionB.performed += instance.OnChangeVisionB;
+            @ChangeVisionB.canceled += instance.OnChangeVisionB;
+            @MarkerOne.started += instance.OnMarkerOne;
+            @MarkerOne.performed += instance.OnMarkerOne;
+            @MarkerOne.canceled += instance.OnMarkerOne;
+            @MarkerTwo.started += instance.OnMarkerTwo;
+            @MarkerTwo.performed += instance.OnMarkerTwo;
+            @MarkerTwo.canceled += instance.OnMarkerTwo;
+        }
+
+        private void UnregisterCallbacks(IPlayerParasiteActions instance)
+        {
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @MoveInstructions.started -= instance.OnMoveInstructions;
+            @MoveInstructions.performed -= instance.OnMoveInstructions;
+            @MoveInstructions.canceled -= instance.OnMoveInstructions;
+            @MapSave.started -= instance.OnMapSave;
+            @MapSave.performed -= instance.OnMapSave;
+            @MapSave.canceled -= instance.OnMapSave;
+            @TargetMark.started -= instance.OnTargetMark;
+            @TargetMark.performed -= instance.OnTargetMark;
+            @TargetMark.canceled -= instance.OnTargetMark;
+            @SlowDown.started -= instance.OnSlowDown;
+            @SlowDown.performed -= instance.OnSlowDown;
+            @SlowDown.canceled -= instance.OnSlowDown;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @ChangeVisionF.started -= instance.OnChangeVisionF;
+            @ChangeVisionF.performed -= instance.OnChangeVisionF;
+            @ChangeVisionF.canceled -= instance.OnChangeVisionF;
+            @ChangeVisionB.started -= instance.OnChangeVisionB;
+            @ChangeVisionB.performed -= instance.OnChangeVisionB;
+            @ChangeVisionB.canceled -= instance.OnChangeVisionB;
+            @MarkerOne.started -= instance.OnMarkerOne;
+            @MarkerOne.performed -= instance.OnMarkerOne;
+            @MarkerOne.canceled -= instance.OnMarkerOne;
+            @MarkerTwo.started -= instance.OnMarkerTwo;
+            @MarkerTwo.performed -= instance.OnMarkerTwo;
+            @MarkerTwo.canceled -= instance.OnMarkerTwo;
+        }
+
+        public void RemoveCallbacks(IPlayerParasiteActions instance)
+        {
+            if (m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerParasiteActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerParasiteActions @PlayerParasite => new PlayerParasiteActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -778,5 +1204,18 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IPlayerParasiteActions
+    {
+        void OnLook(InputAction.CallbackContext context);
+        void OnMoveInstructions(InputAction.CallbackContext context);
+        void OnMapSave(InputAction.CallbackContext context);
+        void OnTargetMark(InputAction.CallbackContext context);
+        void OnSlowDown(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnChangeVisionF(InputAction.CallbackContext context);
+        void OnChangeVisionB(InputAction.CallbackContext context);
+        void OnMarkerOne(InputAction.CallbackContext context);
+        void OnMarkerTwo(InputAction.CallbackContext context);
     }
 }
