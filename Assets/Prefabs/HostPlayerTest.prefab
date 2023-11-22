@@ -120,10 +120,8 @@ GameObject:
   - component: {fileID: 5362343444445158596}
   - component: {fileID: 6708940101140157163}
   - component: {fileID: 8914411848035319774}
-  - component: {fileID: 6557489329557360628}
   - component: {fileID: 8222806045789826093}
-  - component: {fileID: -9195725345222437833}
-  - component: {fileID: 286457537199844135}
+  - component: {fileID: -3518496994373057754}
   m_Layer: 0
   m_Name: HostPlayerTest
   m_TagString: Untagged
@@ -233,18 +231,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23d0721b8bf35f4d8691a2e16bd8206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  lookSensitivity: 5
   movementSpeed: 10
   runSpeed: 10
-  jumpPower: 5
+  jumpPower: 10
   superJumpPower: 20
-  attackPower: 5
+  attackPower: 10
   heavyAttackCooldown: 5
   superJumpCooldown: 5
-  hostDirections: {fileID: 2365378544640014704, guid: ce28ec2f34c243745a536544116d778d,
-    type: 3}
   playerCamera: {fileID: 3692340665301090098}
+  pauseMenu: {fileID: 0}
 --- !u!114 &6708940101140157163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,35 +287,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5362343444445158596}
-        m_TargetAssemblyTypeName: HostMovement, Assembly-CSharp
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 10ef3e98-6156-4600-bb11-34bc611b8564
     m_ActionName: Player-Host/Move[/DualShock4GamepadHID/leftStick]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5362343444445158596}
-        m_TargetAssemblyTypeName: HostMovement, Assembly-CSharp
-        m_MethodName: Look
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 0f63c4a9-f393-4d57-a8f2-97b5ce9a7b3f
     m_ActionName: Player-Host/Look[/DualShock4GamepadHID/rightStick]
   - m_PersistentCalls:
@@ -480,7 +451,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player-Host
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6557489329557360628
+--- !u!54 &8222806045789826093
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073333084074400960}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &-3518496994373057754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,7 +500,7 @@ MonoBehaviour:
   SyncScaleY: 0
   SyncScaleZ: 0
   PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
+  RotAngleThreshold: 0.00001
   ScaleThreshold: 0.01
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
@@ -510,68 +508,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!54 &8222806045789826093
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073333084074400960}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!95 &-9195725345222437833
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073333084074400960}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &286457537199844135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6073333084074400960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4351014f0d6ed1a44bd6e444c69c5cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: -9195725345222437833}
 --- !u!1 &7035538031595084429
 GameObject:
   m_ObjectHideFlags: 0
