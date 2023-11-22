@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class ParasiteInstruct : NetworkBehaviour
 {
+    public Transform target;
     
 
     //need to attatch networkObject to the inspector
@@ -75,6 +76,9 @@ public class ParasiteInstruct : NetworkBehaviour
     [Range(0f, 100f)]
     private float superJumpCooldown = 5f;
 
+    private Vector2 lookInput = Vector2.zero;
+    public Transform playerCamera;
+    public float lookSensitivity = 10f;
     private void Awake()
     {
        
@@ -93,7 +97,11 @@ public class ParasiteInstruct : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Makes the parasites position always be the host
+        if (target != null)
+        {
+            transform.position = target.position;
+        }
 
         if (!IsOwner) return;
 
@@ -116,6 +124,20 @@ public class ParasiteInstruct : NetworkBehaviour
     {
 
     }
+
+    private void LateUpdate()
+    {
+        lookInput = playerInput.actions["Look"].ReadValue<Vector2>();
+
+        if (lookInput != Vector2.zero)
+        {
+            float horizontalRotation = lookInput.x * lookSensitivity * Time.fixedDeltaTime;
+            float verticalRotation = lookInput.y * lookSensitivity * Time.fixedDeltaTime;
+
+            transform.Rotate(Vector3.up, horizontalRotation);
+            playerCamera.Rotate(Vector3.left, verticalRotation);
+        }
+    }
     public void Movement(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -128,9 +150,19 @@ public class ParasiteInstruct : NetworkBehaviour
 
     }
     //The controls for the Host facing direction
-    public void Facing(InputAction.CallbackContext context)
+    public void Look(InputAction.CallbackContext context)
     {
+        if (playerCamera == null)
+        {
+            return;
+        }
 
+        Vector2 lookInput = context.ReadValue<Vector2>();
+        float horizontalRotation = lookInput.x * lookSensitivity * Time.fixedDeltaTime;
+        float verticalRotation = lookInput.y * lookSensitivity * Time.fixedDeltaTime;
+
+        transform.Rotate(Vector3.up, horizontalRotation);
+        playerCamera.Rotate(Vector3.left, verticalRotation);
     }
     public void Jump(InputAction.CallbackContext context)
     {
