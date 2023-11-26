@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStartManager : NetworkBehaviour
 {
@@ -20,6 +21,9 @@ public class GameStartManager : NetworkBehaviour
         GameOver,
         CountdownToStart,
     }
+
+    [SerializeField] private Transform hostPrefab;
+    [SerializeField] private Transform parasitePrefab;
 
     private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
     private bool isLocalGamePaused = false;
@@ -40,8 +44,8 @@ public class GameStartManager : NetworkBehaviour
 
     private void Start()
     {
-        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        //GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+        //GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
 
@@ -49,6 +53,37 @@ public class GameStartManager : NetworkBehaviour
     {
         state.OnValueChanged += State_OnValueChanged;
         isGamePaused.OnValueChanged += isGamePaused_OnValueChanged;
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
+        }
+    }
+
+    private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    { 
+        SpawnPlayers();
+    }
+
+    private void SpawnPlayers()
+    {
+        int playerCount = 0;
+
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if(playerCount == 0)
+            {
+                Transform hostPlayerTransform = Instantiate(hostPrefab);
+                hostPlayerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            }
+            else if (playerCount == 1)
+            {
+                Transform parasitePlayerTransform = Instantiate(parasitePrefab);
+                parasitePlayerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            }
+
+            playerCount++;
+        }     
     }
 
     private void isGamePaused_OnValueChanged(bool previousValue, bool newValue)
@@ -74,31 +109,10 @@ public class GameStartManager : NetworkBehaviour
         {
             isPlayerReady = true;
             OnPlayerReadyChanged?.Invoke(this, EventArgs.Empty);
-
-            SetPlayerReadyServerRPC();
            
         }
     }
-    [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerReadyServerRPC(ServerRpcParams serverRpcParams = default)
-    {
-        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
-
-        bool allClientsReady = true;
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            if(!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
-            {
-                allClientsReady = false;
-                break;
-            }
-        }
-
-        if (allClientsReady)
-        {
-            state.Value = State.CountdownToStart;
-        }
-    }
+   
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
     {

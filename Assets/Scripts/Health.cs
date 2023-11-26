@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    [Range(0f, 5000f)]
+    [Range(0f, 1000f)]
     public float maxHealth = 10f;
 
     public float currentHealth;
@@ -18,6 +18,10 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (HostMovement.blockInput)
+        {
+            damage *= 0.4f;
+        }
         if (currentHealth > 0)
         {
             currentHealth -= damage;

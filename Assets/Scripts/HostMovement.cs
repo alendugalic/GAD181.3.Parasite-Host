@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class HostMovement : NetworkBehaviour
 {
-
     private Rigidbody hostRb;
     private PlayerInput playerInput;
     private bool canJump = true;
@@ -26,7 +25,9 @@ public class HostMovement : NetworkBehaviour
     public Transform playerCamera;
     public GameObject pauseMenu;
     private bool isPaused = false;
-
+    public static bool blockInput = false;
+    
+   
 
     //public override void OnNetworkSpawn() 
     //{ 
@@ -57,6 +58,8 @@ public class HostMovement : NetworkBehaviour
         }
 
         HandleMovementInput();
+
+      
     }
 
     private void HandleLookInput()
@@ -90,6 +93,13 @@ public class HostMovement : NetworkBehaviour
         }
     }
 
+    private void UpdateMovementSpeed()
+    {
+        float currentSpeed = isSprinting ? runSpeed : movementSpeed;
+        Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
+        hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * currentSpeed, ForceMode.Force);
+    }
+
     public void Sprint(InputAction.CallbackContext context)
     {
         Debug.Log("Sprinting");
@@ -108,13 +118,6 @@ public class HostMovement : NetworkBehaviour
         StartCoroutine(SprintCooldown());
     }
 
-    private void UpdateMovementSpeed()
-    {
-        float currentSpeed = isSprinting ? runSpeed : movementSpeed;
-        Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
-        hostRb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * currentSpeed, ForceMode.Force);
-    }
-
     private IEnumerator SprintCooldown()
     {
         yield return new WaitForSeconds(sprintCooldown);
@@ -122,28 +125,40 @@ public class HostMovement : NetworkBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
-
+        //player normal attack
     }
     public void HeavyAttack(InputAction.CallbackContext context)
     {
-
+        //player heavy attack needs also cooldown
     }
 
     public void Block(InputAction.CallbackContext context)
     {
+        //need to add the animation
+        if (context.performed)
+        {
+            Debug.Log("BLOCKING");
+            blockInput = true;
+        }
+        else 
+        {
+            Debug.Log("STOP BLOCKING");
+            blockInput = false;
+        }
 
+       
     }
     public void AreaBlock(InputAction.CallbackContext context)
     {
-
+        // no damage block that stops movement
     }
     public void TargetLock(InputAction.CallbackContext context)
     {
-
+        //to lock on enemies
     }
     public void Eat(InputAction.CallbackContext context)
     {
-
+        //eat dead bodies to regain hp
     }
     public void Jump(InputAction.CallbackContext context)
     {
@@ -151,8 +166,9 @@ public class HostMovement : NetworkBehaviour
         {
             Debug.Log("Jumping");
             hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            
+            isGrounded = false;
         }
+        
     }
 
     public void SuperJump(InputAction.CallbackContext context)
@@ -166,26 +182,18 @@ public class HostMovement : NetworkBehaviour
 
             canJump = false;
             StartCoroutine(SuperJumpCooldown());
-
-            
         }
     }
-
         private IEnumerator SuperJumpCooldown()
-    {
-        
+    {       
         yield return new WaitForSeconds(superJumpCooldown);
         canJump = true;
-
-
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-            isGrounded = true;
-            
-        
+    // checking for collision instead of tags for ability to jump
+    // Using collision as we have different ground types in the game (want to learn to use layers but this works for now)
+    private void OnCollisionEnter(Collision collision) 
+    {     
+            isGrounded = true;   
     }
 
     public void Pause(InputAction.CallbackContext context)

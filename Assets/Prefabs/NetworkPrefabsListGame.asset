@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e651dbb3fbac04af2b8f5abf007ddc23, type: 3}
-  m_Name: NetworkPrefabsListPlayer1
+  m_Name: NetworkPrefabsListGame
   m_EditorClassIdentifier: 
   IsDefault: 0
   List:
   - Override: 0
     Prefab: {fileID: 6073333084074400960, guid: a71c0addbb7805340a1917c1b2c34443,
+      type: 3}
+    SourcePrefabToOverride: {fileID: 0}
+    SourceHashToOverride: 0
+    OverridingTargetPrefab: {fileID: 0}
+  - Override: 0
+    Prefab: {fileID: 6000646129274747618, guid: b61183ef353ef4b46898ad0ec8c1a282,
       type: 3}
     SourcePrefabToOverride: {fileID: 0}
     SourceHashToOverride: 0

@@ -7,29 +7,27 @@ using UnityEngine.UI;
 public class NetworkManagerUI : MonoBehaviour
 {
     
-    [SerializeField] private Button startHostButton;
-    [SerializeField] private Button startClientButton;
+    [SerializeField] private Button createGameButton;
+    [SerializeField] private Button   joinGameButton;
 
     private void Awake()
     {
        
-        startHostButton.onClick.AddListener(() =>
+        createGameButton.onClick.AddListener(() =>
         {
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
-            Hide();
+            Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
+            
         });
-        startClientButton.onClick.AddListener(() =>
+        joinGameButton.onClick.AddListener(() =>
         {
             Debug.Log("CLIENT");
             NetworkManager.Singleton.StartClient();
-            Hide();
+            
         });
     }
 
-    private void Hide()
-    {
-        gameObject.SetActive(false);
-    }
+    
 
 }

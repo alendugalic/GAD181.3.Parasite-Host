@@ -132,7 +132,7 @@
                     "name": "",
                     "id": "c164a050-5e06-456c-a9e8-81b1c1863b5b",
                     "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
+                    "interactions": "Hold(pressPoint=0.01)",
                     "processors": "",
                     "groups": "",
                     "action": "Block",
@@ -459,7 +459,7 @@
             "id": "c71c78d8-2f0c-4469-b05a-b65e2165da2d",
             "actions": [
                 {
-                    "name": "Look",
+                    "name": "LookParasite",
                     "type": "Button",
                     "id": "3ebbec2f-763f-4c63-9bad-80acdb963f6d",
                     "expectedControlType": "Button",
@@ -557,7 +557,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "LookParasite",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

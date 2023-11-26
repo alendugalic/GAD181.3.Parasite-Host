@@ -154,7 +154,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c164a050-5e06-456c-a9e8-81b1c1863b5b"",
                     ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(pressPoint=0.01)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Block"",
@@ -481,7 +481,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
             ""id"": ""c71c78d8-2f0c-4469-b05a-b65e2165da2d"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""LookParasite"",
                     ""type"": ""Button"",
                     ""id"": ""3ebbec2f-763f-4c63-9bad-80acdb963f6d"",
                     ""expectedControlType"": ""Button"",
@@ -579,7 +579,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""LookParasite"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -767,7 +767,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // Player-Parasite
         m_PlayerParasite = asset.FindActionMap("Player-Parasite", throwIfNotFound: true);
-        m_PlayerParasite_Look = m_PlayerParasite.FindAction("Look", throwIfNotFound: true);
+        m_PlayerParasite_LookParasite = m_PlayerParasite.FindAction("LookParasite", throwIfNotFound: true);
         m_PlayerParasite_MoveInstructions = m_PlayerParasite.FindAction("MoveInstructions", throwIfNotFound: true);
         m_PlayerParasite_MapSave = m_PlayerParasite.FindAction("MapSave", throwIfNotFound: true);
         m_PlayerParasite_TargetMark = m_PlayerParasite.FindAction("TargetMark", throwIfNotFound: true);
@@ -1058,7 +1058,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
     // Player-Parasite
     private readonly InputActionMap m_PlayerParasite;
     private List<IPlayerParasiteActions> m_PlayerParasiteActionsCallbackInterfaces = new List<IPlayerParasiteActions>();
-    private readonly InputAction m_PlayerParasite_Look;
+    private readonly InputAction m_PlayerParasite_LookParasite;
     private readonly InputAction m_PlayerParasite_MoveInstructions;
     private readonly InputAction m_PlayerParasite_MapSave;
     private readonly InputAction m_PlayerParasite_TargetMark;
@@ -1072,7 +1072,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
     {
         private @PlayersInputActions m_Wrapper;
         public PlayerParasiteActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Look => m_Wrapper.m_PlayerParasite_Look;
+        public InputAction @LookParasite => m_Wrapper.m_PlayerParasite_LookParasite;
         public InputAction @MoveInstructions => m_Wrapper.m_PlayerParasite_MoveInstructions;
         public InputAction @MapSave => m_Wrapper.m_PlayerParasite_MapSave;
         public InputAction @TargetMark => m_Wrapper.m_PlayerParasite_TargetMark;
@@ -1091,9 +1091,9 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerParasiteActionsCallbackInterfaces.Add(instance);
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @LookParasite.started += instance.OnLookParasite;
+            @LookParasite.performed += instance.OnLookParasite;
+            @LookParasite.canceled += instance.OnLookParasite;
             @MoveInstructions.started += instance.OnMoveInstructions;
             @MoveInstructions.performed += instance.OnMoveInstructions;
             @MoveInstructions.canceled += instance.OnMoveInstructions;
@@ -1125,9 +1125,9 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerParasiteActions instance)
         {
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @LookParasite.started -= instance.OnLookParasite;
+            @LookParasite.performed -= instance.OnLookParasite;
+            @LookParasite.canceled -= instance.OnLookParasite;
             @MoveInstructions.started -= instance.OnMoveInstructions;
             @MoveInstructions.performed -= instance.OnMoveInstructions;
             @MoveInstructions.canceled -= instance.OnMoveInstructions;
@@ -1207,7 +1207,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
     }
     public interface IPlayerParasiteActions
     {
-        void OnLook(InputAction.CallbackContext context);
+        void OnLookParasite(InputAction.CallbackContext context);
         void OnMoveInstructions(InputAction.CallbackContext context);
         void OnMapSave(InputAction.CallbackContext context);
         void OnTargetMark(InputAction.CallbackContext context);
