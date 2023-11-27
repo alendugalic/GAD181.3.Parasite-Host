@@ -24,7 +24,7 @@ public class GameStartManager : NetworkBehaviour
     }
 
     [SerializeField] private Transform hostPrefab;
-    //[SerializeField] private Transform parasitePrefab;
+    
 
     private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
     private bool isLocalGamePaused = false;
@@ -61,6 +61,7 @@ public class GameStartManager : NetworkBehaviour
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
+
         }
     }
 

@@ -176,7 +176,7 @@ public class GameLobby : MonoBehaviour
 
             string relayJoinCode = await GetRelayJoinCode(allocation);
 
-             await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+            await LobbyService.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
             {
                 Data = new Dictionary<string, DataObject>
                 {
@@ -218,6 +218,7 @@ public class GameLobby : MonoBehaviour
     }
     public async void JoinWithId(string lobbyId)
     {
+        OnJoinStarted?.Invoke(this, EventArgs.Empty);
         try
         {
             joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
@@ -232,6 +233,7 @@ public class GameLobby : MonoBehaviour
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            OnJoinFailed?.Invoke(this, EventArgs.Empty);
         }
     }
 

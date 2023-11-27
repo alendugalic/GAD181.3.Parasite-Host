@@ -53,23 +53,26 @@ public class GameMultiplayer : NetworkBehaviour
 
     public void StartHost()
     {
+
         NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
+
     }
 
     private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId)
     {
-        for (int i = 0; i < playerDataNetworkList.Count; i++)
-        {
-            PlayerData playerData = playerDataNetworkList[i];
-            if(playerData.clientId == clientId)
+      
+            for (int i = 0; i < playerDataNetworkList.Count; i++)
             {
-                //Disconnedted client
-                playerDataNetworkList.RemoveAt(i);
-            }
-        }
+                PlayerData playerData = playerDataNetworkList[i];
+                if (playerData.clientId == clientId)
+                {
+                    //Disconnedted client
+                    playerDataNetworkList.RemoveAt(i);
+                }
+            }      
     }
     private void NetworkManager_OnClientConnectedCallback(ulong clientId)
     {
@@ -172,6 +175,6 @@ public class GameMultiplayer : NetworkBehaviour
     public void KickPlayer(ulong clinetId)
     {
         NetworkManager.Singleton.DisconnectClient(clinetId);
-        NetworkManager_Server_OnClientDisconnectCallback(clinetId);
+        //NetworkManager_Server_OnClientDisconnectCallback(clinetId);
     }
 }
