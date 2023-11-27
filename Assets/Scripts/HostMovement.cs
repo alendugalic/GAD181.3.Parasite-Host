@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System;
 
 public class HostMovement : NetworkBehaviour
 {
@@ -30,6 +31,8 @@ public class HostMovement : NetworkBehaviour
     [SerializeField] private AudioListener listener;
     public Transform playerCamera;
 
+    public static HostMovement LocalInstance { get; private set; }
+
 
 
     public override void OnNetworkSpawn()
@@ -38,12 +41,27 @@ public class HostMovement : NetworkBehaviour
         {
             listener.enabled = true;
             vc.Priority = 1; 
+            LocalInstance = this;
         }
         else
         {
             vc.Priority = 0;
         }
+        if(IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        }
+        
     }
+
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    {
+        if (clientId == OwnerClientId)
+        {
+
+        }
+    }
+
     private void Awake()
     {
         hostRb = GetComponent<Rigidbody>();

@@ -1,26 +1,26 @@
 
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GamePauseUI : MonoBehaviour
-//need to attatch networkObject to the inspector
-//also add to network prefabs
-// instantiate it in the script
 {
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button mapButton;
-    [SerializeField] private GameObject mainMap; // for the big map in menu
+    [SerializeField] private Button optionsButton;
+    
     private void Awake()
     {
         resumeButton.onClick.AddListener(() =>
         {
             GameStartManager.Instance.TogglePauseGame();
         });
-        //mainMenuButton.onClick.AddListener(() =>
-        //{
-        //    ChildSceneLoader.Load(Loader.Scene.StartMenuScene);
-        //});
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            NetworkManager.Singleton.Shutdown();
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
         //mapButton.onClick.AddListener(() =>
         //{
         //    Hide();
@@ -60,15 +60,14 @@ public class GamePauseUI : MonoBehaviour
         
     }
 
-    // public void BigMap()
+    //public void Map()
     //{
-         //Hide()
-         //mainMap.SetActive(true)     this will show the canvas map
+    //    Hide()
+    //     mainMap.SetActive(true)    /* this will show the canvas map*/
     //}
 
     //public void back()
     //{
-          //Hide()
-          //Show()
+       
     //}
 }

@@ -12,12 +12,13 @@ public class GameMultiplayer : NetworkBehaviour
 {
     public static GameMultiplayer Instance { get; private set; }
 
+
     public const int MAX_Player_AMMOUNT = 4;
     private const string PLAYER_PREF_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
 
     public event EventHandler onTryingToJoinGame;
     public event EventHandler onFailedToJoinGame;
-    public event EventHandler onPlayerDataNetworkListChanged;
+    public event EventHandler OnPlayerDataNetworkListChanged;
 
     private NetworkList<PlayerData> playerDataNetworkList;
     private string playerName;
@@ -47,7 +48,7 @@ public class GameMultiplayer : NetworkBehaviour
 
     private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
     {
-        onPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
+        OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void StartHost()
@@ -99,6 +100,7 @@ public class GameMultiplayer : NetworkBehaviour
     public void StartClient()
     {
         onTryingToJoinGame?.Invoke(this, EventArgs.Empty);
+
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_Client_OnClientConnectedCallback;
         NetworkManager.Singleton.StartClient();
@@ -157,5 +159,19 @@ public class GameMultiplayer : NetworkBehaviour
     private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId)
     {
         onFailedToJoinGame?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool IsPlayerIndexConnected(int playerIndex)
+    {
+        return playerIndex < playerDataNetworkList.Count;
+    }
+    public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
+    {
+        return playerDataNetworkList[playerIndex];
+    }
+    public void KickPlayer(ulong clinetId)
+    {
+        NetworkManager.Singleton.DisconnectClient(clinetId);
+        NetworkManager_Server_OnClientDisconnectCallback(clinetId);
     }
 }

@@ -475,10 +475,10 @@ MonoBehaviour:
   attackPower: 10
   heavyAttackCooldown: 5
   superJumpCooldown: 5
-  playerCamera: {fileID: 6324793678145743137}
   pauseMenu: {fileID: 0}
   vc: {fileID: 8920944513493896384}
   listener: {fileID: 5479594005179008590}
+  playerCamera: {fileID: 6324793678145743137}
 --- !u!114 &6708940101140157163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,19 +526,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6073333084074400960}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 10ef3e98-6156-4600-bb11-34bc611b8564
     m_ActionName: Player-Host/Move[/DualShock4GamepadHID/leftStick]
   - m_PersistentCalls:
