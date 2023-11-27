@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -106,9 +108,20 @@ public class GameLobby : MonoBehaviour
             Debug.Log(e);
         }
     }
-    private void AllocateRelay()
+    private async Task<Allocation> AllocateRelay()
     {
-        //RelayService.Instance.CreateAllocationAsync();
+        try
+        {
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(GameMultiplayer.MAX_Player_AMMOUNT - 1);
+
+            return allocation;
+        }catch (RelayServiceException e)
+        {
+            Debug.Log(e);
+
+            return default;
+        }
+      
     }
     public async void CreateLobby(string lobbyName, bool isPrivate)
     {
@@ -119,6 +132,8 @@ public class GameLobby : MonoBehaviour
             {
                 IsPrivate = isPrivate,
             });
+
+            await AllocateRelay();
 
             NetworkManager.Singleton.StartHost();
             Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
