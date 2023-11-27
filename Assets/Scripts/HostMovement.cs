@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class HostMovement : NetworkBehaviour
 {
@@ -11,7 +12,7 @@ public class HostMovement : NetworkBehaviour
     private bool canJump = true;
     private bool isGrounded = true;
     private bool isSprinting = false;
-    private bool isMoving = false;
+    private bool isMoving = true;
     private bool canSprint = true;
     private float sprintCooldown = 5f;
     private float lookSensitivity = 100f;
@@ -26,13 +27,24 @@ public class HostMovement : NetworkBehaviour
     public GameObject pauseMenu;
     private bool isPaused = false;
     public static bool blockInput = false;
-    
-   
+    [SerializeField] private CinemachineVirtualCamera vc;
+    [SerializeField] private AudioListener listener;
 
-    //public override void OnNetworkSpawn() 
-    //{ 
-    //    if (!IsLocalPlayer) enabled = false; 
-    //}
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            listener.enabled = true;
+            vc.Priority = 1;
+           
+        }
+        else
+        {
+            vc.Priority = 0;
+        }
+    }
     private void Awake()
     {
         hostRb = GetComponent<Rigidbody>();
@@ -41,29 +53,27 @@ public class HostMovement : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (!IsOwner)
+        if (IsOwner)
         {
-            return;
-        }
-
-        HandleLookInput();
+            HandleLookInput();
+        } 
+        
+       
     }
 
     private void FixedUpdate()
     {
-
-        if (!IsOwner)
+        if (IsOwner)
         {
-            return;
+             HandleMovementInput();
         }
-
-        HandleMovementInput();
-
-      
+       
+        
     }
 
     private void HandleLookInput()
     {
+        if (!IsOwner) return;
         if (playerCamera == null) return;
 
         Vector2 lookInput = playerInput.actions["Look"].ReadValue<Vector2>();
@@ -76,6 +86,7 @@ public class HostMovement : NetworkBehaviour
 
     private void HandleMovementInput()
     {
+        if (!IsOwner) return;
         Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
 
         if (inputVector != Vector2.zero)
@@ -102,6 +113,7 @@ public class HostMovement : NetworkBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         Debug.Log("Sprinting");
         if (context.performed)
         {
@@ -125,15 +137,18 @@ public class HostMovement : NetworkBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         //player normal attack
     }
     public void HeavyAttack(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         //player heavy attack needs also cooldown
     }
 
     public void Block(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         //need to add the animation
         if (context.performed)
         {
@@ -150,18 +165,25 @@ public class HostMovement : NetworkBehaviour
     }
     public void AreaBlock(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         // no damage block that stops movement
     }
     public void TargetLock(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         //to lock on enemies
     }
     public void Eat(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         //eat dead bodies to regain hp
     }
     public void Jump(InputAction.CallbackContext context)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         if (context.performed && isGrounded)
         {
             Debug.Log("Jumping");
@@ -173,6 +195,7 @@ public class HostMovement : NetworkBehaviour
 
     public void SuperJump(InputAction.CallbackContext context)
     {
+        if (!IsOwner) return;
         if (context.performed && canJump && isGrounded)
         {
             Debug.Log("Super Jump");

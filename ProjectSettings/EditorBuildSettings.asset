@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Alen_DoNotMessWith/LobbyScene.unity
+    path: Assets/Scenes/LobbyScene.unity
     guid: 4dccb7411b47c564289ce89ae2276176
   - enabled: 1
     path: Assets/Scenes/GameMain.unity
     guid: a62ce8661f1d5dd45864f6e409727fb4
   - enabled: 1
-    path: Assets/Scenes/Alen_DoNotMessWith/CharacterSelectScene.unity
+    path: Assets/Scenes/CharacterSelectScene.unity
     guid: 1a646d31fe521794f9fe10d5222fda63
+  - enabled: 0
+    path: Assets/Scenes/Alen_DoNotMessWith/Tester2.2.unity
+    guid: b1f007e288f938742974a6cb84e85756
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2e33245e3ed110044ab6c9d6869096ef,
       type: 2}

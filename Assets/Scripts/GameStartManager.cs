@@ -14,6 +14,7 @@ public class GameStartManager : NetworkBehaviour
     public event EventHandler OnLocalGamePaused;
     public event EventHandler OnLocalGameUnpaused;
     public event EventHandler OnStateChanged;
+  
     private enum State
     {
         WaitingToStart,
@@ -23,7 +24,7 @@ public class GameStartManager : NetworkBehaviour
     }
 
     [SerializeField] private Transform hostPrefab;
-    [SerializeField] private Transform parasitePrefab;
+    //[SerializeField] private Transform parasitePrefab;
 
     private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
     private bool isLocalGamePaused = false;
@@ -40,7 +41,10 @@ public class GameStartManager : NetworkBehaviour
         health = GetComponent<Health>();
         playerReadyDictionary = new Dictionary<ulong, bool>();
         playerPausedDictionary = new Dictionary<ulong, bool>();
+
     }
+
+  
 
     private void Start()
     {
@@ -61,29 +65,33 @@ public class GameStartManager : NetworkBehaviour
     }
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
-    { 
+    {
+        
         SpawnPlayers();
     }
 
     private void SpawnPlayers()
     {
-        int playerCount = 0;
-
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            if(playerCount == 0)
+            Transform playerTransform;
+
+            if (clientId == NetworkManager.Singleton.LocalClientId)
             {
-                Transform hostPlayerTransform = Instantiate(hostPrefab);
-                hostPlayerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+                playerTransform = Instantiate(hostPrefab);
             }
-            else if (playerCount == 1)
+            else
             {
-                Transform parasitePlayerTransform = Instantiate(parasitePrefab);
-                parasitePlayerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+                // You can instantiate a different prefab for non-local clients if needed
+                // playerTransform = Instantiate(parasitePrefab);
+                playerTransform = Instantiate(hostPrefab); 
             }
 
-            playerCount++;
-        }     
+            var networkObject = playerTransform.GetComponent<NetworkObject>();
+            networkObject.SpawnAsPlayerObject(clientId, clientId == NetworkManager.Singleton.LocalClientId);
+
+            Debug.Log($"Player spawned. Is local player: {networkObject.IsLocalPlayer}");
+        }
     }
 
     private void isGamePaused_OnValueChanged(bool previousValue, bool newValue)
