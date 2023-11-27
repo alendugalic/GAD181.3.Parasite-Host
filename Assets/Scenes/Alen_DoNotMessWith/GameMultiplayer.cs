@@ -4,7 +4,9 @@ using UnityEngine;
 using Unity.Netcode;
 using System;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using Unity.Services.Authentication;
 
 public class GameMultiplayer : NetworkBehaviour
 {
@@ -51,7 +53,7 @@ public class GameMultiplayer : NetworkBehaviour
     public void StartHost()
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
     }
@@ -63,9 +65,20 @@ public class GameMultiplayer : NetworkBehaviour
             PlayerData playerData = playerDataNetworkList[i];
             if(playerData.clientId == clientId)
             {
+                //Disconnedted client
                 playerDataNetworkList.RemoveAt(i);
             }
         }
+    }
+    private void NetworkManager_OnClientConnectedCallback(ulong clientId)
+    {
+        playerDataNetworkList.Add(new PlayerData
+        {
+            clientId = clientId,
+
+        });
+        SetPlayerNameServerRpc(GetPlayerName());
+        SetPlayerIdServerRpc(AuthenticationService.Instance.PlayerId);
     }
     private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
@@ -86,11 +99,62 @@ public class GameMultiplayer : NetworkBehaviour
     public void StartClient()
     {
         onTryingToJoinGame?.Invoke(this, EventArgs.Empty);
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_Client_OnClientConnectedCallback;
         NetworkManager.Singleton.StartClient();
     }
+    private void NetworkManager_Client_OnClientConnectedCallback(ulong clientId)
+    {
+        SetPlayerNameServerRpc(GetPlayerName());
+        SetPlayerIdServerRpc(AuthenticationService.Instance.PlayerId);
+    }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerNameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+        playerData.playerName = playerName;
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerIdServerRpc(string playerId, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId);
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+        playerData.playerId = playerId;
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+
+    public int GetPlayerDataIndexFromClientId(ulong clientId)
+    {
+        for (int i=0; i< playerDataNetworkList.Count; i++)
+        {
+            if (playerDataNetworkList[i].clientId == clientId)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public PlayerData GetPlayerDataFromClientId(ulong clientId)
+    {
+        foreach(PlayerData playerData in playerDataNetworkList)
+        {
+            if(playerData.clientId == clientId)
+            {
+                return playerData;
+            }                
+        }
+        return default;
+    }
+    public PlayerData GetPlayerData()
+    {
+        return GetPlayerDataFromClientId(NetworkManager.Singleton.LocalClientId);
+    }
+
+    private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId)
     {
         onFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }

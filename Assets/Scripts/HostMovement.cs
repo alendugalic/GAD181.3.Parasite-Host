@@ -23,12 +23,12 @@ public class HostMovement : NetworkBehaviour
     public float attackPower = 5f;
     public float heavyAttackCooldown = 5f;
     public float superJumpCooldown = 5f;
-    public Transform playerCamera;
     public GameObject pauseMenu;
     private bool isPaused = false;
     public static bool blockInput = false;
     [SerializeField] private CinemachineVirtualCamera vc;
     [SerializeField] private AudioListener listener;
+    public Transform playerCamera;
 
 
 
@@ -37,8 +37,7 @@ public class HostMovement : NetworkBehaviour
         if (IsOwner)
         {
             listener.enabled = true;
-            vc.Priority = 1;
-           
+            vc.Priority = 1; 
         }
         else
         {

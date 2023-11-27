@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyButton: {fileID: 1325395612}
-  mainMenuButton: {fileID: 0}
+  mainMenuButton: {fileID: 554131181}
   lobbyNameText: {fileID: 1585657106}
   lobbyCodeText: {fileID: 211688124}
 --- !u!1 &641380554
