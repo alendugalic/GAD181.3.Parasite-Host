@@ -47,20 +47,10 @@ public class HostMovement : NetworkBehaviour
         {
             vc.Priority = 0;
         }
-        if(IsServer)
-        {
-            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
-        }
         
     }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
-    {
-        if (clientId == OwnerClientId)
-        {
-
-        }
-    }
+   
 
     private void Awake()
     {
