@@ -52,7 +52,7 @@ public class LobbyMessageUI : MonoBehaviour
 
     private void GameMultiplayer_OnFailedToJoinGame(object sender, EventArgs e)
     {
-        if(NetworkManager.Singleton.DisconnectReason == "")
+        if (NetworkManager.Singleton.DisconnectReason == "")
         {
             ShowMessage("Failed To Connect");
         }
@@ -60,7 +60,7 @@ public class LobbyMessageUI : MonoBehaviour
         {
             ShowMessage(NetworkManager.Singleton.DisconnectReason);
         }
-        
+
     }
 
     private void ShowMessage(string message)

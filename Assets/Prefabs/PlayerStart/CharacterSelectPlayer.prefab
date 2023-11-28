@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8937938780525851547}
   - component: {fileID: 987790937248682548}
+  - component: {fileID: 9006822520778406452}
   m_Layer: 0
   m_Name: CharacterSelectPlayer
   m_TagString: Untagged
@@ -52,6 +53,26 @@ MonoBehaviour:
   readyGameObject: {fileID: 9050801625085114760}
   kickButton: {fileID: 8787166948820675639}
   playerNameText: {fileID: 2492476491131429346}
+--- !u!114 &9006822520778406452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116593659298941158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &3453049977272633342
 GameObject:
   m_ObjectHideFlags: 0

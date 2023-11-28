@@ -27,6 +27,7 @@ public class GameLobby : MonoBehaviour
     public event EventHandler OnJoinFailed;
     public event EventHandler OnQuickJoinFailed;
     
+    
 
     public event EventHandler<OnLobbyListChangedEventArgs> onLobbyListChanged;
     public class OnLobbyListChangedEventArgs : EventArgs
@@ -185,7 +186,7 @@ public class GameLobby : MonoBehaviour
             });
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
-
+            Debug.Log(FindAnyObjectByType<GameMultiplayer>().name);
             GameMultiplayer.Instance.StartHost();
             Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
         }
@@ -208,7 +209,7 @@ public class GameLobby : MonoBehaviour
 
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
 
-            GameMultiplayer.Instance.StartClient();
+            NetworkManager.Singleton.StartClient();
         } catch(LobbyServiceException e)
         {
             Debug.Log(e);

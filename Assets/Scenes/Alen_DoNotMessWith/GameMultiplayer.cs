@@ -13,7 +13,7 @@ public class GameMultiplayer : NetworkBehaviour
     public static GameMultiplayer Instance { get; private set; }
 
 
-    public const int MAX_Player_AMMOUNT = 4;
+    public static int MAX_Player_AMMOUNT = 4;
     private const string PLAYER_PREF_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
 
     public event EventHandler onTryingToJoinGame;

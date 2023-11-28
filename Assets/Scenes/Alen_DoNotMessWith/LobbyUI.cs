@@ -28,6 +28,7 @@ public class LobbyUI : MonoBehaviour
         createLobbyButton.onClick.AddListener(() =>
         {
             lobbyCreateUI.Show();
+            
         });
         quickJoinButton.onClick.AddListener(() =>
         {
@@ -76,4 +77,5 @@ public class LobbyUI : MonoBehaviour
     {
         GameLobby.Instance.onLobbyListChanged -= GameLobby_OnLobbyListChanged;
     }
+   
 }
