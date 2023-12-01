@@ -31,6 +31,11 @@ public class HostMovement : NetworkBehaviour
     [SerializeField] private AudioListener listener;
     public Transform playerCamera;
 
+    [Header("Player terrain smoothing")]
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private AnimationCurve animCurve;
+    [SerializeField] private float time;
+
     public static HostMovement LocalInstance { get; private set; }
 
 
@@ -63,10 +68,12 @@ public class HostMovement : NetworkBehaviour
         if (IsOwner)
         {
             HandleLookInput();
-        } 
-        
+        }
+        SurfaceAlignment();
        
     }
+
+  
 
     private void FixedUpdate()
     {
@@ -221,10 +228,10 @@ public class HostMovement : NetworkBehaviour
     }
     // checking for collision instead of tags for ability to jump
     // Using collision as we have different ground types in the game (want to learn to use layers but this works for now)
-    private void OnCollisionEnter(Collision collision) 
-    {     
-            isGrounded = true;   
-    }
+    //private void OnCollisionEnter(Collision collision) 
+    //{     
+    //        isGrounded = true;   
+    //}
 
     public void Pause(InputAction.CallbackContext context)
     {
@@ -252,6 +259,18 @@ public class HostMovement : NetworkBehaviour
 
         // Switch action map
         playerInput.SwitchCurrentActionMap(isPaused ? "UI" : "Player-Host");
+    }
+
+    private void SurfaceAlignment()
+    {
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit info = new RaycastHit();
+        //Quaternion RotationRef = Quaternion.Euler(0, 0, 0);
+        if (Physics.Raycast(ray, out info, whatIsGround))
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), animCurve.Evaluate(time));
+            //transform.rotation = Quaternion.Euler(RotationRef.eulerAngles.x, transform.eulerAngles.y, RotationRef.eulerAngles.z);
+        }
     }
 }
 
