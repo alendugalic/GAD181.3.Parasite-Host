@@ -473,12 +473,17 @@ MonoBehaviour:
   jumpPower: 10
   superJumpPower: 20
   attackPower: 10
+  heavyAttackPower: 10
   heavyAttackCooldown: 5
   superJumpCooldown: 5
   pauseMenu: {fileID: 0}
   vc: {fileID: 8920944513493896384}
   listener: {fileID: 5479594005179008590}
+  animator: {fileID: 0}
   playerCamera: {fileID: 6324793678145743137}
+  currentStamina: 50
+  maxStamina: 50
+  staminaRegenRate: 5
 --- !u!114 &6708940101140157163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +539,19 @@ MonoBehaviour:
     m_ActionId: 0f63c4a9-f393-4d57-a8f2-97b5ce9a7b3f
     m_ActionName: Player-Host/Look[/DualShock4GamepadHID/rightStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c4dba8b8-f087-4199-a8e7-12549c7e0e92
     m_ActionName: Player-Host/Attack[/DualShock4GamepadHID/rightTrigger]
   - m_PersistentCalls:

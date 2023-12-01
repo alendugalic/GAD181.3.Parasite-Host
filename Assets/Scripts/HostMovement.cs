@@ -10,27 +10,44 @@ public class HostMovement : NetworkBehaviour
 {
     private Rigidbody hostRb;
     private PlayerInput playerInput;
+
     private bool canJump = true;
     private bool isGrounded = true;
     private bool isSprinting = false;
     private bool isMoving = true;
     private bool canSprint = true;
+    private bool isPaused = false;
+    public static bool blockInput = false;
+
     private float sprintCooldown = 5f;
     private float lookSensitivity = 100f;
+
+
+    [Header("Player Input Power")]
     public float movementSpeed = 5f;
     public float runSpeed = 10f;
     public float jumpPower = 5f;
     public float superJumpPower = 20f;
     public float attackPower = 5f;
-    public float heavyAttackCooldown = 5f;
+    public float heavyAttackPower = 10f;
+    public float heavyAttackCooldown = 2f;
     public float superJumpCooldown = 5f;
+
+    [Header("Player Fields")]
     public GameObject pauseMenu;
-    private bool isPaused = false;
-    public static bool blockInput = false;
     [SerializeField] private CinemachineVirtualCamera vc;
     [SerializeField] private AudioListener listener;
+    [SerializeField] private Animator animator;
     public Transform playerCamera;
 
+    [Header("Player stamina")]
+    public float currentStamina = 50f;
+    public float maxStamina = 50f;
+    public float staminaRegenRate = 5f; 
+
+    private const float sprintStaminaCost = 5f;
+    private const float heavyAttackStaminaCost = 10f;
+    private const float superJumpStaminaCost = 15f;
     public static HostMovement LocalInstance { get; private set; }
 
 
@@ -56,6 +73,7 @@ public class HostMovement : NetworkBehaviour
     {
         hostRb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
 
     private void LateUpdate()
@@ -74,7 +92,7 @@ public class HostMovement : NetworkBehaviour
         {
              HandleMovementInput();
         }
-       
+        RegenerateStamina();
         
     }
 
@@ -99,15 +117,52 @@ public class HostMovement : NetworkBehaviour
         if (inputVector != Vector2.zero)
         {
             Vector3 forwardDirection = transform.forward;
+            Vector3 rightDirection = transform.right;
+
             float currentSpeed = isSprinting ? runSpeed : movementSpeed;
-            hostRb.AddForce(new Vector3(forwardDirection.x * inputVector.y, 0, forwardDirection.z * inputVector.y) * currentSpeed, ForceMode.Force);
+
+            Vector3 movement = (forwardDirection * inputVector.y + rightDirection * inputVector.x).normalized;
+
+            // Apply force for movement
+            hostRb.AddForce(movement * currentSpeed, ForceMode.Force);
             isMoving = true;
+
+            // Play animations based on movement
+            if (isSprinting)
+            {
+                // Play sprint animation
+                // animator.Play("SprintAnimation");
+            }
+            else if (inputVector.y > 0)
+            {
+                // Play forward movement animation
+                // animator.Play("ForwardMovementAnimation");
+            }
+            else if (inputVector.y < 0)
+            {
+                // Play backward movement animation
+                // animator.Play("BackwardMovementAnimation");
+            }
+
+            if (inputVector.x > 0)
+            {
+                // Play strafe right animation
+                // animator.Play("StrafeRightAnimation");
+            }
+            else if (inputVector.x < 0)
+            {
+                // Play strafe left animation
+                // animator.Play("StrafeLeftAnimation");
+            }
         }
         else
         {
             hostRb.velocity = Vector3.zero;
             isMoving = false;
             isSprinting = false;
+
+            // Play idle animation or transition to idle state
+            // animator.Play("IdleAnimation");
         }
     }
 
@@ -124,8 +179,13 @@ public class HostMovement : NetworkBehaviour
         Debug.Log("Sprinting");
         if (context.performed)
         {
-            isSprinting = true;
-            UpdateMovementSpeed();
+            if (CanConsumeStamina(sprintStaminaCost))
+            {
+                ConsumeStamina(sprintStaminaCost);
+                isSprinting = true;
+                UpdateMovementSpeed();
+            }
+          
         }
         else if (context.canceled)
         {
@@ -145,14 +205,79 @@ public class HostMovement : NetworkBehaviour
     public void Attack(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        //player normal attack
-    }
-    public void HeavyAttack(InputAction.CallbackContext context)
-    {
-        if (!IsOwner) return;
-        //player heavy attack needs also cooldown
+        if (context.performed)
+        {
+            // Trigger the attack
+            PerformAttack();
+        }
     }
 
+    private void PerformAttack()
+    {
+        // need to find the actual sword names
+        Transform leftSword = transform.Find("LeftSword");
+        Transform rightSword = transform.Find("RightSword");
+
+        
+        CheckForEnemies(leftSword);
+        CheckForEnemies(rightSword);
+
+        // Play attack animation (replace "AttackAnimation" with actual name
+        // animator.Play("AttackAnimation");
+    }
+
+    private void CheckForEnemies(Transform sword)
+    {
+        
+        float attackRange = 2.0f;
+
+        Collider[] hitColliders = Physics.OverlapSphere(sword.position, attackRange);
+
+        foreach (Collider collider in hitColliders)
+        {
+            // Check if the collider belongs to an enemy
+            Health enemyHealth = collider.GetComponent<Health>();
+
+            if (enemyHealth != null)
+            {
+                // Deal damage to the enemy
+                enemyHealth.TakeDamage(attackPower);
+            }
+        }
+    }
+
+public void HeavyAttack(InputAction.CallbackContext context)
+    {
+        if (!IsOwner) return;
+        if (context.performed)
+        {
+            if (CanConsumeStamina(heavyAttackStaminaCost))
+            {
+                ConsumeStamina(heavyAttackStaminaCost);
+                PerformHeavyAttack();  
+                StartCoroutine(HeavyAttackCooldown());
+            }             
+        }
+    }
+
+    private void PerformHeavyAttack()
+    {
+        // Assuming you have two swords as children of the player object
+        Transform leftSword = transform.Find("LeftSword");
+        Transform rightSword = transform.Find("RightSword");
+
+       
+        CheckForEnemies(leftSword);
+        CheckForEnemies(rightSword);
+
+        // Play heavy attack animation (replace "HeavyAttackAnimation" with your actual animation name)
+        // animator.Play("HeavyAttackAnimation");
+    }
+
+    private IEnumerator HeavyAttackCooldown()
+    {        
+        yield return new WaitForSeconds(heavyAttackCooldown); 
+    }
     public void Block(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
@@ -167,8 +292,6 @@ public class HostMovement : NetworkBehaviour
             Debug.Log("STOP BLOCKING");
             blockInput = false;
         }
-
-       
     }
     public void AreaBlock(InputAction.CallbackContext context)
     {
@@ -205,13 +328,18 @@ public class HostMovement : NetworkBehaviour
         if (!IsOwner) return;
         if (context.performed && canJump && isGrounded)
         {
-            Debug.Log("Super Jump");
-            Vector3 jumpDirection = playerCamera.forward; // Use the forward direction of the player
+            if (CanConsumeStamina(superJumpStaminaCost))
+            {
+                ConsumeStamina(superJumpStaminaCost);
+                Debug.Log("Super Jump");
+                Vector3 jumpDirection = playerCamera.forward; // Use the forward direction of the player
 
-            hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
+                hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
 
-            canJump = false;
-            StartCoroutine(SuperJumpCooldown());
+                canJump = false;
+                StartCoroutine(SuperJumpCooldown());
+            }
+           
         }
     }
         private IEnumerator SuperJumpCooldown()
@@ -252,6 +380,25 @@ public class HostMovement : NetworkBehaviour
 
         // Switch action map
         playerInput.SwitchCurrentActionMap(isPaused ? "UI" : "Player-Host");
+    }
+
+    private void RegenerateStamina()
+    {
+        if (currentStamina < maxStamina)
+        {
+            currentStamina += staminaRegenRate * Time.fixedDeltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+        }
+    }
+
+    private bool CanConsumeStamina(float cost)
+    {
+        return currentStamina >= cost;
+    }
+
+    private void ConsumeStamina(float cost)
+    {
+        currentStamina = Mathf.Clamp(currentStamina - cost, 0f, maxStamina);
     }
 }
 
