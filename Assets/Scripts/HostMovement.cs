@@ -22,6 +22,12 @@ public class HostMovement : NetworkBehaviour
     private float sprintCooldown = 5f;
     private float lookSensitivity = 100f;
 
+    [Header("Swords")]
+    [SerializeField] private Transform leftSword;
+    [SerializeField] private Transform rightSword;
+
+    [Header("Attack Parameters")]
+    public float attackRange = 2.0f;
 
     [Header("Player Input Power")]
     public float movementSpeed = 5f;
@@ -38,6 +44,9 @@ public class HostMovement : NetworkBehaviour
     [SerializeField] private CinemachineVirtualCamera vc;
     [SerializeField] private AudioListener listener;
     [SerializeField] private Animator animator;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private AnimationCurve animCurve;
+    [SerializeField] private float time;
     public Transform playerCamera;
 
     [Header("Player stamina")]
@@ -93,6 +102,7 @@ public class HostMovement : NetworkBehaviour
              HandleMovementInput();
         }
         RegenerateStamina();
+        SurfaceAlignment();
         
     }
 
@@ -131,28 +141,26 @@ public class HostMovement : NetworkBehaviour
             if (isSprinting)
             {
                 // Play sprint animation
-                // animator.Play("SprintAnimation");
+                animator.Play("Run");
             }
             else if (inputVector.y > 0)
             {
                 // Play forward movement animation
-                // animator.Play("ForwardMovementAnimation");
+                animator.Play("Walk");
             }
             else if (inputVector.y < 0)
             {
                 // Play backward movement animation
-                // animator.Play("BackwardMovementAnimation");
+                animator.Play("BackWalk");
             }
 
             if (inputVector.x > 0)
             {
-                // Play strafe right animation
-                // animator.Play("StrafeRightAnimation");
+                animator.Play("StrafeRight");
             }
             else if (inputVector.x < 0)
             {
-                // Play strafe left animation
-                // animator.Play("StrafeLeftAnimation");
+                animator.Play("StrafeLeft");
             }
         }
         else
@@ -160,9 +168,7 @@ public class HostMovement : NetworkBehaviour
             hostRb.velocity = Vector3.zero;
             isMoving = false;
             isSprinting = false;
-
-            // Play idle animation or transition to idle state
-            // animator.Play("IdleAnimation");
+            animator.Play("Idle");
         }
     }
 
@@ -209,28 +215,27 @@ public class HostMovement : NetworkBehaviour
         {
             // Trigger the attack
             PerformAttack();
+            animator.Play("NormalAttack");
         }
     }
 
     private void PerformAttack()
     {
-        // need to find the actual sword names
-        Transform leftSword = transform.Find("LeftSword");
-        Transform rightSword = transform.Find("RightSword");
+        if (leftSword != null && rightSword != null)
+        {
+            CheckForEnemies(leftSword);
+            CheckForEnemies(rightSword);
 
-        
-        CheckForEnemies(leftSword);
-        CheckForEnemies(rightSword);
-
-        // Play attack animation (replace "AttackAnimation" with actual name
-        // animator.Play("AttackAnimation");
+            
+        }
+        else
+        {
+            Debug.LogWarning("LeftSword or RightSword not assigned!");
+        }
     }
 
     private void CheckForEnemies(Transform sword)
     {
-        
-        float attackRange = 2.0f;
-
         Collider[] hitColliders = Physics.OverlapSphere(sword.position, attackRange);
 
         foreach (Collider collider in hitColliders)
@@ -246,7 +251,8 @@ public class HostMovement : NetworkBehaviour
         }
     }
 
-public void HeavyAttack(InputAction.CallbackContext context)
+
+    public void HeavyAttack(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
         if (context.performed)
@@ -256,22 +262,15 @@ public void HeavyAttack(InputAction.CallbackContext context)
                 ConsumeStamina(heavyAttackStaminaCost);
                 PerformHeavyAttack();  
                 StartCoroutine(HeavyAttackCooldown());
+                animator.Play("HeavyAttack");
             }             
         }
     }
 
     private void PerformHeavyAttack()
     {
-        // Assuming you have two swords as children of the player object
-        Transform leftSword = transform.Find("LeftSword");
-        Transform rightSword = transform.Find("RightSword");
-
-       
         CheckForEnemies(leftSword);
-        CheckForEnemies(rightSword);
-
-        // Play heavy attack animation (replace "HeavyAttackAnimation" with your actual animation name)
-        // animator.Play("HeavyAttackAnimation");
+        CheckForEnemies(rightSword); 
     }
 
     private IEnumerator HeavyAttackCooldown()
@@ -316,6 +315,7 @@ public void HeavyAttack(InputAction.CallbackContext context)
         }
         if (context.performed && isGrounded)
         {
+            animator.Play("Jump");
             Debug.Log("Jumping");
             hostRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isGrounded = false;
@@ -335,7 +335,7 @@ public void HeavyAttack(InputAction.CallbackContext context)
                 Vector3 jumpDirection = playerCamera.forward; // Use the forward direction of the player
 
                 hostRb.AddForce(jumpDirection * superJumpPower, ForceMode.Impulse);
-
+                animator.Play("SuperJump");
                 canJump = false;
                 StartCoroutine(SuperJumpCooldown());
             }
@@ -399,6 +399,17 @@ public void HeavyAttack(InputAction.CallbackContext context)
     private void ConsumeStamina(float cost)
     {
         currentStamina = Mathf.Clamp(currentStamina - cost, 0f, maxStamina);
+    }
+    private void SurfaceAlignment()
+    {
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit info = new RaycastHit();
+        Quaternion rotationRef = Quaternion.Euler(0, 0, 0); 
+        if(Physics.Raycast(ray, out info, whatIsGround))
+        {
+            rotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), animCurve.Evaluate(time));
+            transform.rotation = Quaternion.Euler(rotationRef.eulerAngles.x, transform.rotation.y, rotationRef.eulerAngles.z);
+        }
     }
 }
 
