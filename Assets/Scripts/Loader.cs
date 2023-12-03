@@ -9,7 +9,7 @@ public static class Loader
    public enum Scene
     {
         MainMenuScene,
-        GameMain,
+        GameMainTwo,
         LoadingScene,
         LobbyScene,
         CharacterSelectScene,
