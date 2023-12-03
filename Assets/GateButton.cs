@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
-public class Button : NetworkBehaviour
+public class GateButton : MonoBehaviour
 {
     // Reference to the gate script
     public Gate gate;

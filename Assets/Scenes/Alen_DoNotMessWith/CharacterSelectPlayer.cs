@@ -9,7 +9,7 @@ public class CharacterSelectPlayer : MonoBehaviour
 {
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;
-    [SerializeField] private Button kickButton;
+    [SerializeField] private UnityEngine.UI.Button kickButton;
     [SerializeField] private TextMeshPro playerNameText;
 
     private void Awake()

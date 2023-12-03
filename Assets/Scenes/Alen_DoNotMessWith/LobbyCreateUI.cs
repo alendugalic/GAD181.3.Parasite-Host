@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class LobbyCreateUI : MonoBehaviour
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button createPublicButton;
-    [SerializeField] private Button createPrivateButton;
+    [SerializeField] private UnityEngine.UI.Button closeButton;
+    [SerializeField] private UnityEngine.UI.Button createPublicButton;
+    [SerializeField] private UnityEngine.UI.Button createPrivateButton;
     [SerializeField] private TMP_InputField lobbyNameInputField;
 
     private void Awake()
