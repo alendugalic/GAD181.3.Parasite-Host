@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AreaBlock",
+                    "name": "OpenDoor",
                     "type": "Button",
                     "id": "4ca45a11-18e7-4113-bf2e-9d7143adf50f",
                     "expectedControlType": "Button",
@@ -146,7 +146,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AreaBlock",
+                    "action": "OpenDoor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

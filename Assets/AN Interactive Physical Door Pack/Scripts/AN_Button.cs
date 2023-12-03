@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class AN_Button : MonoBehaviour
+public class AN_Button : NetworkBehaviour
 {
     [Tooltip("True for rotation like valve (used for ramp/elevator only)")]
     public bool isValve = false;
@@ -30,7 +32,9 @@ public class AN_Button : MonoBehaviour
     bool valveBool = true;
     float current, startYPosition;
     Quaternion startQuat, rampQuat;
-
+    private PlayerInput playerInput;
+    [Tooltip("The door to be opened by this button")]
+    public AN_DoorScript assignedDoor;
     Animator anim;
 
     // NearView()
@@ -40,6 +44,7 @@ public class AN_Button : MonoBehaviour
 
     void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
         startYPosition = RampObject.position.y;
         startQuat = transform.rotation;
@@ -50,8 +55,9 @@ public class AN_Button : MonoBehaviour
     {
         if (!Locked)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !isValve && DoorObject != null && DoorObject.Remote && NearView()) // 1.lever and 2.button
+            if (playerInput != null && playerInput.actions["OpenDoor"].triggered && assignedDoor != null && NearView())
             {
+                Debug.Log("Opening Door");
                 DoorObject.Action(); // void in door script to open/close
                 if (isLever) // animations
                 {

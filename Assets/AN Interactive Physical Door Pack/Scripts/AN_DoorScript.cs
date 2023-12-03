@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class AN_DoorScript : MonoBehaviour
+public class AN_DoorScript : NetworkBehaviour
 {
     [Tooltip("If it is false door can't be used")]
     public bool Locked = false;

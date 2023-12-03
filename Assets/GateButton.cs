@@ -1,26 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class GateButton : MonoBehaviour
 {
-    // Reference to the gate script
-    public Gate gate;
+    public Gate associatedGate;
+    private bool isActivated = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool CanInteract()
     {
-
+        return !isActivated;
     }
 
-    // OnTriggerEnter is called when another collider enters the trigger zone
-    void OnTriggerEnter(Collider other)
+    public void OpenDoor()
     {
-        // Check if the entering collider is a player
-        if (other.CompareTag("Player"))
+        if (associatedGate != null)
         {
-            // Call the OpenGate method on the Gate script
-            gate.OpenGate();
+            associatedGate.OpenGate();
+            isActivated = true;
         }
     }
 }

@@ -73,7 +73,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AreaBlock"",
+                    ""name"": ""OpenDoor"",
                     ""type"": ""Button"",
                     ""id"": ""4ca45a11-18e7-4113-bf2e-9d7143adf50f"",
                     ""expectedControlType"": ""Button"",
@@ -168,7 +168,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""AreaBlock"",
+                    ""action"": ""OpenDoor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -498,7 +498,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         m_PlayerHost_Attack = m_PlayerHost.FindAction("Attack", throwIfNotFound: true);
         m_PlayerHost_HeavyAttack = m_PlayerHost.FindAction("HeavyAttack", throwIfNotFound: true);
         m_PlayerHost_Block = m_PlayerHost.FindAction("Block", throwIfNotFound: true);
-        m_PlayerHost_AreaBlock = m_PlayerHost.FindAction("AreaBlock", throwIfNotFound: true);
+        m_PlayerHost_OpenDoor = m_PlayerHost.FindAction("OpenDoor", throwIfNotFound: true);
         m_PlayerHost_TargetLock = m_PlayerHost.FindAction("TargetLock", throwIfNotFound: true);
         m_PlayerHost_Eat = m_PlayerHost.FindAction("Eat", throwIfNotFound: true);
         m_PlayerHost_SuperJump = m_PlayerHost.FindAction("SuperJump", throwIfNotFound: true);
@@ -579,7 +579,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHost_Attack;
     private readonly InputAction m_PlayerHost_HeavyAttack;
     private readonly InputAction m_PlayerHost_Block;
-    private readonly InputAction m_PlayerHost_AreaBlock;
+    private readonly InputAction m_PlayerHost_OpenDoor;
     private readonly InputAction m_PlayerHost_TargetLock;
     private readonly InputAction m_PlayerHost_Eat;
     private readonly InputAction m_PlayerHost_SuperJump;
@@ -594,7 +594,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_PlayerHost_Attack;
         public InputAction @HeavyAttack => m_Wrapper.m_PlayerHost_HeavyAttack;
         public InputAction @Block => m_Wrapper.m_PlayerHost_Block;
-        public InputAction @AreaBlock => m_Wrapper.m_PlayerHost_AreaBlock;
+        public InputAction @OpenDoor => m_Wrapper.m_PlayerHost_OpenDoor;
         public InputAction @TargetLock => m_Wrapper.m_PlayerHost_TargetLock;
         public InputAction @Eat => m_Wrapper.m_PlayerHost_Eat;
         public InputAction @SuperJump => m_Wrapper.m_PlayerHost_SuperJump;
@@ -624,9 +624,9 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
-            @AreaBlock.started += instance.OnAreaBlock;
-            @AreaBlock.performed += instance.OnAreaBlock;
-            @AreaBlock.canceled += instance.OnAreaBlock;
+            @OpenDoor.started += instance.OnOpenDoor;
+            @OpenDoor.performed += instance.OnOpenDoor;
+            @OpenDoor.canceled += instance.OnOpenDoor;
             @TargetLock.started += instance.OnTargetLock;
             @TargetLock.performed += instance.OnTargetLock;
             @TargetLock.canceled += instance.OnTargetLock;
@@ -661,9 +661,9 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
-            @AreaBlock.started -= instance.OnAreaBlock;
-            @AreaBlock.performed -= instance.OnAreaBlock;
-            @AreaBlock.canceled -= instance.OnAreaBlock;
+            @OpenDoor.started -= instance.OnOpenDoor;
+            @OpenDoor.performed -= instance.OnOpenDoor;
+            @OpenDoor.canceled -= instance.OnOpenDoor;
             @TargetLock.started -= instance.OnTargetLock;
             @TargetLock.performed -= instance.OnTargetLock;
             @TargetLock.canceled -= instance.OnTargetLock;
@@ -806,7 +806,7 @@ public partial class @PlayersInputActions: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
-        void OnAreaBlock(InputAction.CallbackContext context);
+        void OnOpenDoor(InputAction.CallbackContext context);
         void OnTargetLock(InputAction.CallbackContext context);
         void OnEat(InputAction.CallbackContext context);
         void OnSuperJump(InputAction.CallbackContext context);

@@ -44,9 +44,10 @@ public class HostMovement : NetworkBehaviour
     [SerializeField] private CinemachineVirtualCamera vc;
     [SerializeField] private AudioListener listener;
     [SerializeField] private Animator animator;
-    [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private AnimationCurve animCurve;
-    [SerializeField] private float time;
+    public float interactionRadius = 2f;
+    //[SerializeField] private LayerMask whatIsGround;
+    //[SerializeField] private AnimationCurve animCurve;
+    //[SerializeField] private float time;
     public Transform playerCamera;
 
     [Header("Player stamina")]
@@ -100,9 +101,10 @@ public class HostMovement : NetworkBehaviour
         if (IsOwner)
         {
              HandleMovementInput();
+            
         }
         RegenerateStamina();
-        SurfaceAlignment();
+        //SurfaceAlignment();
         
     }
 
@@ -292,10 +294,26 @@ public class HostMovement : NetworkBehaviour
             blockInput = false;
         }
     }
-    public void AreaBlock(InputAction.CallbackContext context)
+    public void OpenDoor(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
-        // no damage block that stops movement
+        if (context.performed)
+        {
+            InteractWithLever();
+        }
+    }
+    private void InteractWithLever()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            GateButton lever = collider.GetComponent<GateButton>();
+            if (lever != null && lever.CanInteract())
+            {
+                lever.OpenDoor();
+            }
+        }
     }
     public void TargetLock(InputAction.CallbackContext context)
     {
@@ -349,10 +367,10 @@ public class HostMovement : NetworkBehaviour
     }
     // checking for collision instead of tags for ability to jump
     // Using collision as we have different ground types in the game (want to learn to use layers but this works for now)
-    private void OnCollisionEnter(Collision collision) 
-    {     
-            isGrounded = true;   
-    }
+    //private void OnCollisionEnter(Collision collision) 
+    //{     
+    //        isGrounded = true;   
+    //}
 
     public void Pause(InputAction.CallbackContext context)
     {
@@ -400,17 +418,17 @@ public class HostMovement : NetworkBehaviour
     {
         currentStamina = Mathf.Clamp(currentStamina - cost, 0f, maxStamina);
     }
-    private void SurfaceAlignment()
-    {
-        Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit info = new RaycastHit();
-        Quaternion rotationRef = Quaternion.Euler(0, 0, 0); 
-        if(Physics.Raycast(ray, out info, whatIsGround))
-        {
-            rotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), animCurve.Evaluate(time));
-            transform.rotation = Quaternion.Euler(rotationRef.eulerAngles.x, transform.rotation.y, rotationRef.eulerAngles.z);
-        }
-    }
+    //private void SurfaceAlignment()
+    //{
+    //    Ray ray = new Ray(transform.position, -transform.up);
+    //    RaycastHit info = new RaycastHit();
+    //    Quaternion rotationRef = Quaternion.Euler(0, 0, 0);
+    //    if (Physics.Raycast(ray, out info, whatIsGround))
+    //    {
+    //        rotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), animCurve.Evaluate(time));
+    //        transform.rotation = Quaternion.Euler(rotationRef.eulerAngles.x, transform.rotation.y, rotationRef.eulerAngles.z);
+    //    }
+    //}
 }
 
 

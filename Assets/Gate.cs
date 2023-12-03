@@ -17,5 +17,8 @@ public class Gate : NetworkBehaviour
     {
         // Set the "Open" trigger to true
         animator.SetBool("Open", true);
+        Debug.Log("Gate Open");
     }
+
+   
 }
