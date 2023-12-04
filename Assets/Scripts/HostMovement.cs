@@ -21,6 +21,7 @@ public class HostMovement : NetworkBehaviour
 
     private float sprintCooldown = 5f;
     private float lookSensitivity = 100f;
+    public Health health;
 
     [Header("Swords")]
     [SerializeField] private Transform leftSword;
@@ -79,6 +80,7 @@ public class HostMovement : NetworkBehaviour
         hostRb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
     }
 
     private void LateUpdate()

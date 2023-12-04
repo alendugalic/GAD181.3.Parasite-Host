@@ -7154,6 +7154,7 @@ GameObject:
   - component: {fileID: -5742537647028162608}
   - component: {fileID: 4193384932546684785}
   - component: {fileID: 5439433147823970657}
+  - component: {fileID: -4976538193846665725}
   m_Layer: 7
   m_Name: PlayerOrc
   m_TagString: Player
@@ -7214,6 +7215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23d0721b8bf35f4d8691a2e16bd8206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   leftSword: {fileID: 505584580315272038}
   rightSword: {fileID: 2611609753915102660}
   attackRange: 2
@@ -7557,6 +7559,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4976538193846665725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556704729058435556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5a31df1f292344b322f2544a83a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  animator: {fileID: 2948218298313014740}
+  currentHealth: 200
 --- !u!1 &7573889591166161038
 GameObject:
   m_ObjectHideFlags: 0

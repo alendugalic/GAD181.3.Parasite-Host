@@ -1306,6 +1306,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3536060045079999448}
   - component: {fileID: 7700176351199212122}
+  - component: {fileID: 7184964879439488647}
+  - component: {fileID: 2451362089979520573}
   m_Layer: 0
   m_Name: weapon1
   m_TagString: Untagged
@@ -1506,6 +1508,40 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.9769346, y: -0.32163393, z: 0.13283253}
     m_Extent: {x: 0.15971977, y: 0.17218018, z: 0.13024741}
   m_DirtyAABB: 0
+--- !u!65 &7184964879439488647
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573615945986624139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.30652136, y: 0.33043438, z: 0.2499604}
+  m_Center: {x: 0.9374273, y: 0.6773771, z: 0.12746076}
+--- !u!114 &2451362089979520573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573615945986624139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba43d358ba3552144b68e125b8716400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &1700223129659819111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,6 +2885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6706593100909972551}
   - component: {fileID: 2097451189688029423}
+  - component: {fileID: 487098963454852986}
   m_Layer: 0
   m_Name: body 1
   m_TagString: Untagged
@@ -3049,6 +3086,28 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00005477667, y: 0.09384704, z: -0.03495744}
     m_Extent: {x: 0.7512619, y: 0.6863196, z: 0.19800535}
   m_DirtyAABB: 0
+--- !u!64 &487098963454852986
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2574582323085237655}
+  m_Material: {fileID: 13400000, guid: 59f8e7d4b8fc1b546978c18cbefc17f8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: ea3c190656c1be74bba0bd65a3905278, type: 3}
 --- !u!1 &2617672267998473812
 GameObject:
   m_ObjectHideFlags: 0
@@ -6515,6 +6574,7 @@ GameObject:
   - component: {fileID: -6837533990917198599}
   - component: {fileID: 3671930636627905539}
   - component: {fileID: 5836313182129883541}
+  - component: {fileID: 642775742252621688}
   m_Layer: 0
   m_Name: EnemyKnightTest
   m_TagString: Untagged
@@ -6587,7 +6647,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &-6837533990917198599
 MonoBehaviour:
@@ -6603,9 +6663,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   detectionRange: 10
-  attackRange: 5
+  attackRange: 2
   attackCooldown: 3
-  animator: {fileID: 0}
+  animator: {fileID: 4191900382117659483}
+  patrolRadius: 6
 --- !u!114 &3671930636627905539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6648,6 +6709,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &642775742252621688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5304519845361989208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5a31df1f292344b322f2544a83a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 150
+  animator: {fileID: 4191900382117659483}
+  currentHealth: 150
 --- !u!1 &5317950971074376118
 GameObject:
   m_ObjectHideFlags: 0
@@ -7894,6 +7970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8733646326924057233}
   - component: {fileID: 8998983010053247838}
+  - component: {fileID: 6993784346193534045}
   m_Layer: 0
   m_Name: body12
   m_TagString: Untagged
@@ -8094,6 +8171,28 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0016247481, y: -0.7683431, z: -0.0318973}
     m_Extent: {x: 0.29430014, y: 0.28750077, z: 0.16771811}
   m_DirtyAABB: 0
+--- !u!64 &6993784346193534045
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008416389518909339}
+  m_Material: {fileID: 13400000, guid: 59f8e7d4b8fc1b546978c18cbefc17f8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300024, guid: ea3c190656c1be74bba0bd65a3905278, type: 3}
 --- !u!1 &6017835755238862581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10235,6 +10334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781904917539599256}
   - component: {fileID: 5342893658681966513}
+  - component: {fileID: 6436356031320547675}
   m_Layer: 0
   m_Name: body2
   m_TagString: Untagged
@@ -10435,6 +10535,28 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000000029802322, y: 0.7042118, z: -0.030168727}
     m_Extent: {x: 0.100939065, y: 0.16481644, z: 0.14192116}
   m_DirtyAABB: 0
+--- !u!64 &6436356031320547675
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448769502993479338}
+  m_Material: {fileID: 13400000, guid: 59f8e7d4b8fc1b546978c18cbefc17f8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: ea3c190656c1be74bba0bd65a3905278, type: 3}
 --- !u!1 &7480116537054947434
 GameObject:
   m_ObjectHideFlags: 0

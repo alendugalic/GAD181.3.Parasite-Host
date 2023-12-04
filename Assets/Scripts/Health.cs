@@ -8,11 +8,19 @@ public class Health : MonoBehaviour
     [Range(0f, 1000f)]
     public float maxHealth = 10f;
 
+    public Animator animator;
+
+
     public float currentHealth;
 
     private void Start()
     {
         currentHealth = maxHealth;
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
 
@@ -38,6 +46,12 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+
+        if (animator != null)
+        {
+            animator.SetBool("isDead", true);
+        }
+
         gameObject.SetActive(false);
         Destroy(gameObject);
     }

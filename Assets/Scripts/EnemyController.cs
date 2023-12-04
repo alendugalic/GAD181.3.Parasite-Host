@@ -7,11 +7,15 @@ using UnityEngine;
 public class EnemyController : NetworkBehaviour
 {
     public float speed = 5f;
-    public float detectionRange = 5f;
+    public float detectionRange = 6f;
     public float attackRange = 1.5f;
     public float attackCooldown = 3f; // Time between attacks
     private float timeSinceLastAttack = 0f;
     public Animator animator;
+
+    // Limit the enemy movement within a circle of this radius
+    public float patrolRadius = 6f;
+    private Vector3 patrolPoint;
 
     void Start()
     {
@@ -19,6 +23,9 @@ public class EnemyController : NetworkBehaviour
         {
             animator = GetComponent<Animator>();
         }
+
+        // Initialize the patrol point
+        UpdatePatrolPoint();
     }
 
     void Update()
@@ -38,13 +45,15 @@ public class EnemyController : NetworkBehaviour
 
                 if (distanceToPlayer <= detectionRange)
                 {
-                    Vector3 direction = (targetPlayer.transform.position - transform.position).normalized;
+                    Vector3 direction;
 
                     if (distanceToPlayer > attackRange)
                     {
-                        // Move towards the player if not in attack range
-                        //animator.SetBool("isAttacking", false);
-                        transform.Translate(direction * speed * Time.deltaTime);
+                        // Move towards the patrol point if not in attack range
+                        direction = (patrolPoint - transform.position).normalized;
+
+                        // Set walking animation
+                        animator.SetBool("isWalking", true);
                     }
                     else
                     {
@@ -55,9 +64,29 @@ public class EnemyController : NetworkBehaviour
                             AttackPlayer();
                             timeSinceLastAttack = Time.time; // Record the time of the attack
                         }
+
+                        // Stay in place when attacking
+                        direction = Vector3.zero;
+
+                        // Set walking animation to false when attacking
+                        animator.SetBool("isWalking", false);
+                    }
+
+                    // Move the enemy
+                    transform.Translate(direction * speed * Time.deltaTime);
+
+                    // If the enemy has reached the patrol point, update it
+                    if (Vector3.Distance(transform.position, patrolPoint) < 0.2f)
+                    {
+                        UpdatePatrolPoint();
                     }
                 }
             }
+        }
+        else
+        {
+            // Set walking animation to false when no players are detected
+            animator.SetBool("isWalking", false);
         }
     }
 
@@ -68,6 +97,9 @@ public class EnemyController : NetworkBehaviour
 
         // Play the attack animation
         animator.SetBool("isAttacking", true);
+
+        // Set walking animation to false when attacking
+        animator.SetBool("isWalking", false);
     }
 
     GameObject GetClosestPlayer(GameObject[] players)
@@ -88,4 +120,10 @@ public class EnemyController : NetworkBehaviour
         return closestPlayer;
     }
 
+    void UpdatePatrolPoint()
+    {
+        // Generate a random point within the patrol radius
+        patrolPoint = transform.position + UnityEngine.Random.onUnitSphere * patrolRadius;
+        patrolPoint.y = transform.position.y; // Ensure the patrol point is at the same height as the enemy
+    }
 }
