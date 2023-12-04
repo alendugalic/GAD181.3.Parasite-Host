@@ -5,20 +5,33 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class GateButton : MonoBehaviour
 {
-    public Gate associatedGate;
-    private bool isActivated = false;
+    public Gate gate;
+    //public Gate associatedGate;
+    // private bool isActivated = false;
 
-    public bool CanInteract()
-    {
-        return !isActivated;
-    }
+    // public bool CanInteract()
+    // {
+    //return !isActivated;
+    // }
 
-    public void OpenDoor()
+    //public void OpenDoor()
+    //{
+
+    //    //if (associatedGate != null)
+    //    //{
+    //    //    associatedGate.OpenGate();
+    //    //    isActivated = true;
+    //    //}
+
+
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (associatedGate != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            associatedGate.OpenGate();
-            isActivated = true;
+            gate.OpenGate();
         }
+      
     }
 }

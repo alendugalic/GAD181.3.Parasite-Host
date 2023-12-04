@@ -294,27 +294,27 @@ public class HostMovement : NetworkBehaviour
             blockInput = false;
         }
     }
-    public void OpenDoor(InputAction.CallbackContext context)
-    {
-        if (!IsOwner) return;
-        if (context.performed)
-        {
-            InteractWithLever();
-        }
-    }
-    private void InteractWithLever()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+    //public void OpenDoor(InputAction.CallbackContext context)
+    //{
+    //    if (!IsOwner) return;
+    //    if (context.performed)
+    //    {
+    //        InteractWithLever();
+    //    }
+    //}
+    //private void InteractWithLever()
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
 
-        foreach (Collider collider in colliders)
-        {
-            GateButton lever = collider.GetComponent<GateButton>();
-            if (lever != null && lever.CanInteract())
-            {
-                lever.OpenDoor();
-            }
-        }
-    }
+    //    foreach (Collider collider in colliders)
+    //    {
+    //        GateButton lever = collider.GetComponent<GateButton>();
+    //        if (lever != null && lever.CanInteract())
+    //        {
+    //            lever.OpenDoor();
+    //        }
+    //    }
+    //}
     public void TargetLock(InputAction.CallbackContext context)
     {
         if (!IsOwner) return;
