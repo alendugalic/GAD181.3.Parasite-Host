@@ -30,8 +30,9 @@ public class GateButton : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Player touched button");
             gate.OpenGate();
         }
-      
     }
 }
+
