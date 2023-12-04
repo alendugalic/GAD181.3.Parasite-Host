@@ -9,17 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: 4dccb7411b47c564289ce89ae2276176
   - enabled: 1
-    path: Assets/Scenes/GameMain.unity
-    guid: a62ce8661f1d5dd45864f6e409727fb4
+    path: Assets/Scenes/GameMainTwo.unity
+    guid: b4f4aed7efa116c4eb55a728d079a172
   - enabled: 1
     path: Assets/Scenes/CharacterSelectScene.unity
     guid: 1a646d31fe521794f9fe10d5222fda63
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: fb8d7dbf5402c154b81d414808316dcc
-  - enabled: 1
-    path: Assets/Scenes/GameMainTwo.unity
-    guid: b4f4aed7efa116c4eb55a728d079a172
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2e33245e3ed110044ab6c9d6869096ef,
       type: 2}

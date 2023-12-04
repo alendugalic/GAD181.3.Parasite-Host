@@ -7217,12 +7217,12 @@ MonoBehaviour:
   leftSword: {fileID: 505584580315272038}
   rightSword: {fileID: 2611609753915102660}
   attackRange: 2
-  movementSpeed: 10
+  movementSpeed: 8
   runSpeed: 10
   jumpPower: 5
-  superJumpPower: 20
+  superJumpPower: 10
   attackPower: 10
-  heavyAttackPower: 10
+  heavyAttackPower: 30
   heavyAttackCooldown: 5
   superJumpCooldown: 5
   pauseMenu: {fileID: 0}
@@ -7231,8 +7231,8 @@ MonoBehaviour:
   animator: {fileID: 2948218298313014740}
   interactionRadius: 2
   playerCamera: {fileID: 5566513959283541320}
-  currentStamina: 50
-  maxStamina: 50
+  currentStamina: 150
+  maxStamina: 150
   staminaRegenRate: 5
 --- !u!114 &7157878558151084924
 MonoBehaviour:
