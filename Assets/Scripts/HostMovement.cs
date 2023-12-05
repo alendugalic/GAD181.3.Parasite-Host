@@ -46,9 +46,6 @@ public class HostMovement : NetworkBehaviour
     [SerializeField] private AudioListener listener;
     [SerializeField] private Animator animator;
     public float interactionRadius = 2f;
-    //[SerializeField] private LayerMask whatIsGround;
-    //[SerializeField] private AnimationCurve animCurve;
-    //[SerializeField] private float time;
     public Transform playerCamera;
 
     [Header("Player stamina")]
@@ -81,6 +78,7 @@ public class HostMovement : NetworkBehaviour
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        // test all inputs without the ! return on owner
     }
 
     private void LateUpdate()
@@ -98,8 +96,8 @@ public class HostMovement : NetworkBehaviour
              HandleMovementInput();
         }
         RegenerateStamina();
-        //SurfaceAlignment();
         
+
     }
 
     private void HandleLookInput()
@@ -117,7 +115,7 @@ public class HostMovement : NetworkBehaviour
 
     private void HandleMovementInput()
     {
-        if (!IsOwner) return;
+        if (!IsOwner) return; 
         Vector2 inputVector = playerInput.actions["Move"].ReadValue<Vector2>();
 
         if (inputVector != Vector2.zero)
@@ -382,17 +380,7 @@ public class HostMovement : NetworkBehaviour
     {
         currentStamina = Mathf.Clamp(currentStamina - cost, 0f, maxStamina);
     }
-    //private void SurfaceAlignment()
-    //{
-    //    Ray ray = new Ray(transform.position, -transform.up);
-    //    RaycastHit info = new RaycastHit();
-    //    Quaternion rotationRef = Quaternion.Euler(0, 0, 0);
-    //    if (Physics.Raycast(ray, out info, whatIsGround))
-    //    {
-    //        rotationRef = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), animCurve.Evaluate(time));
-    //        transform.rotation = Quaternion.Euler(rotationRef.eulerAngles.x, transform.rotation.y, rotationRef.eulerAngles.z);
-    //    }
-    //}
+   
 }
 
 

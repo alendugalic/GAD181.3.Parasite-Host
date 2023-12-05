@@ -79,13 +79,13 @@ public class GameStartManager : NetworkBehaviour
 
             if (clientId == NetworkManager.Singleton.LocalClientId)
             {
-                playerTransform = Instantiate(hostPrefab);
+                // Spawn local player at a random position within the room
+                playerTransform = Instantiate(hostPrefab, GetRandomSpawnPosition(), Quaternion.identity);
             }
             else
             {
-                // You can instantiate a different prefab for non-local clients if needed
-                // playerTransform = Instantiate(parasitePrefab);
-                playerTransform = Instantiate(hostPrefab); 
+                // Spawn non-local player at a random position within the room
+                playerTransform = Instantiate(hostPrefab, GetRandomSpawnPosition(), Quaternion.identity);
             }
 
             var networkObject = playerTransform.GetComponent<NetworkObject>();
@@ -94,6 +94,17 @@ public class GameStartManager : NetworkBehaviour
             Debug.Log($"Player spawned. Is local player: {networkObject.IsLocalPlayer}");
         }
     }
+
+    private Vector3 GetRandomSpawnPosition()
+    {
+        // Replace this with logic to get random spawn positions within the room
+        float randomX = UnityEngine.Random.Range(-11, 9);
+        float randomY = UnityEngine.Random.Range(0.5f, 1.5f);
+        float randomZ = UnityEngine.Random.Range(-14, 4);
+
+        return new Vector3(randomX, randomY, randomZ);
+    }
+
 
     private void isGamePaused_OnValueChanged(bool previousValue, bool newValue)
     {
