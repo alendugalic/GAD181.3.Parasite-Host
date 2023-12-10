@@ -64,8 +64,8 @@ namespace SlimUI.ModernMenu{
 			}
 			else
 			{
-				difficultyhardcoretextLINE.gameObject.SetActive(true);
-				difficultynormaltextLINE.gameObject.SetActive(false);
+				//difficultyhardcoretextLINE.gameObject.SetActive(true);
+				//difficultynormaltextLINE.gameObject.SetActive(false);
 			}
 
 			// check slider values
