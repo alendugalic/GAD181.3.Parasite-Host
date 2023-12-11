@@ -6694,7 +6694,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5304519845361989208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -6721,9 +6721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad5a31df1f292344b322f2544a83a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 50
   animator: {fileID: 4191900382117659483}
-  currentHealth: 150
+  currentHealth: 50
 --- !u!1 &5317950971074376118
 GameObject:
   m_ObjectHideFlags: 0
@@ -10554,7 +10554,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: ea3c190656c1be74bba0bd65a3905278, type: 3}
 --- !u!1 &7480116537054947434
