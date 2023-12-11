@@ -70,3 +70,173 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Piloto Studio/Textures/Trail_WispyGeneric.png.meta
+Assets/Piloto Studio/Textures/Trail_WispyGeneric.png
+Assets/Piloto Studio/Textures/SmokeHarsh_BlackSpots.png.meta
+Assets/Piloto Studio/Textures/SmokeHarsh_BlackSpots.png
+Assets/Piloto Studio/Textures/PackedNoises_Generic.png.meta
+Assets/Piloto Studio/Textures/PackedNoises_Generic.png
+Assets/Piloto Studio/Textures/HalftoneCrescent.png.meta
+Assets/Piloto Studio/Textures/HalftoneCrescent.png
+Assets/Piloto Studio/Textures/gradient_004.png.meta
+Assets/Piloto Studio/Textures/gradient_004.png
+Assets/Piloto Studio/Textures/Glowdots_Speckles.png.meta
+Assets/Piloto Studio/Textures/Glowdots_Speckles.png
+Assets/Piloto Studio/Textures/Flare_Glowdot.png.meta
+Assets/Piloto Studio/Textures/Flare_Glowdot.png
+Assets/Piloto Studio/Textures/Flare_FatDot.png.meta
+Assets/Piloto Studio/Textures/Flare_FatDot.png
+Assets/Piloto Studio/Textures/Flare_Cross.png.meta
+Assets/Piloto Studio/Textures/Flare_Cross.png
+Assets/Piloto Studio/Textures/FireQuad_Stylized.png.meta
+Assets/Piloto Studio/Textures/FireQuad_Stylized.png
+Assets/Piloto Studio/Textures/FireNoise.png.meta
+Assets/Piloto Studio/Textures/FireNoise.png
+Assets/Piloto Studio/Textures.meta
+Assets/Piloto Studio/Readme/Scripts/ReadmeBehaviour.cs.meta
+Assets/Piloto Studio/Readme/Scripts/ReadmeBehaviour.cs
+Assets/Piloto Studio/Readme/Scripts/Readme.cs.meta
+Assets/Piloto Studio/Readme/Scripts/Readme.cs
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeHierarchy.cs.meta
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeHierarchy.cs
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeEditorStyles.cs.meta
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeEditorStyles.cs
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeBehaviourEditor.cs.meta
+Assets/Piloto Studio/Readme/Scripts/Editor/ReadmeBehaviourEditor.cs
+Assets/Piloto Studio/Readme/Scripts/Editor.meta
+Assets/Piloto Studio/Readme/Scripts.meta
+Assets/Piloto Studio/Readme/Piloto_Logo.png.meta
+Assets/Piloto Studio/Readme/Piloto_Logo.png
+Assets/Piloto Studio/Readme.meta
+Assets/Piloto Studio/Models/InfiniteBackground_Better.fbx.meta
+Assets/Piloto Studio/Models/InfiniteBackground_Better.fbx
+Assets/Piloto Studio/Models.meta
+Assets/Piloto Studio/Materials/Shared/Trail_WispyGeneric_Alpha.mat.meta
+Assets/Piloto Studio/Materials/Shared/Trail_WispyGeneric_Alpha.mat
+Assets/Piloto Studio/Materials/Shared/Smoke_HarsherAlbedo_Alpha_Soft.mat.meta
+Assets/Piloto Studio/Materials/Shared/Smoke_HarsherAlbedo_Alpha_Soft.mat
+Assets/Piloto Studio/Materials/Shared/Nokdef_Add_Soft.mat.meta
+Assets/Piloto Studio/Materials/Shared/Nokdef_Add_Soft.mat
+Assets/Piloto Studio/Materials/Shared/FuzzballAdditive_Soft.mat.meta
+Assets/Piloto Studio/Materials/Shared/FuzzballAdditive_Soft.mat
+Assets/Piloto Studio/Materials/Shared/FuzzAdd.mat.meta
+Assets/Piloto Studio/Materials/Shared/FuzzAdd.mat
+Assets/Piloto Studio/Materials/Shared/Flare_GlowdotPickbook_Add.mat.meta
+Assets/Piloto Studio/Materials/Shared/Flare_GlowdotPickbook_Add.mat
+Assets/Piloto Studio/Materials/Shared/Flare_FatDot_Alpha.mat.meta
+Assets/Piloto Studio/Materials/Shared/Flare_FatDot_Alpha.mat
+Assets/Piloto Studio/Materials/Shared/Flare_FatDot_Add_Soft.mat.meta
+Assets/Piloto Studio/Materials/Shared/Flare_FatDot_Add_Soft.mat
+Assets/Piloto Studio/Materials/Shared/Crescent_Halftone_Add.mat.meta
+Assets/Piloto Studio/Materials/Shared/Crescent_Halftone_Add.mat
+Assets/Piloto Studio/Materials/Shared.meta
+Assets/Piloto Studio/Materials/InfiniteBG.mat.meta
+Assets/Piloto Studio/Materials/InfiniteBG.mat
+Assets/Piloto Studio/Materials/Fire/Fire_AlphaDistort_Ramped.mat.meta
+Assets/Piloto Studio/Materials/Fire/Fire_AlphaDistort_Ramped.mat
+Assets/Piloto Studio/Materials/Fire.meta
+Assets/Piloto Studio/Materials.meta
+Assets/Piloto Studio/Campfire And Torches Pack/README_PILOTO STUDIO.asset.meta
+Assets/Piloto Studio/Campfire And Torches Pack/README_PILOTO STUDIO.asset
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_trashcan_001_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_trashcan_001_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_trashcan_001.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_trashcan_001.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_003_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_003_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_003.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_003.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_002_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_002_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_002.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_002.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_001_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_001_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_001.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_torch_001.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_02_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_02_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_02.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_02.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_01_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_01_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_01.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_props_candle_01.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_002_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_002_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_002.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_002.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_001_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_001_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_001.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_planks_001.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_003_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_003_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_003.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_003.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_002_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_002_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_002.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_002.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_001_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_001_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_001.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_irontorch_001.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_005_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_005_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_005.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_005.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_004_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_004_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_004.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_004.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_003_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_003_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_003.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_003.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_002_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_002_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_002.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_002.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_001_AmbienceFX.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_001_AmbienceFX.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_001.prefab.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs/SM_campfire_001.prefab
+Assets/Piloto Studio/Campfire And Torches Pack/Prefabs.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_trashcan_001.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_trashcan_001.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_003.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_003.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_002.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_002.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_001.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_torch_001.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_props_candle_02.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_props_candle_02.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_props_candle_01.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_props_candle_01.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_planks_002.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_planks_002.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_planks_001.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_planks_001.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_003.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_003.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_002.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_002.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_001.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_irontorch_001.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_005.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_005.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_004.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_004.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_003.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_003.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_002.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_002.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_001.fbx.meta
+Assets/Piloto Studio/Campfire And Torches Pack/Models/SM_campfire_001.fbx
+Assets/Piloto Studio/Campfire And Torches Pack/Models.meta
+Assets/Piloto Studio/Campfire And Torches Pack/ContentOverview.unity.meta
+Assets/Piloto Studio/Campfire And Torches Pack/ContentOverview.unity
+Assets/Piloto Studio/Campfire And Torches Pack.meta
+Assets/Piloto Studio.meta

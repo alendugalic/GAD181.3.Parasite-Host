@@ -6,25 +6,12 @@ using UnityEngine.ProBuilder.Shapes;
 public class GateButton : MonoBehaviour
 {
     public Gate gate;
-    //public Gate associatedGate;
-    // private bool isActivated = false;
+    private AudioSource audioSource; // Declare AudioSource variable
 
-    // public bool CanInteract()
-    // {
-    //return !isActivated;
-    // }
-
-    //public void OpenDoor()
-    //{
-
-    //    //if (associatedGate != null)
-    //    //{
-    //    //    associatedGate.OpenGate();
-    //    //    isActivated = true;
-    //    //}
-
-
-    //}
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // Assign AudioSource component
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +19,12 @@ public class GateButton : MonoBehaviour
         {
             Debug.Log("Player touched button");
             gate.OpenGate();
+
+            // Play the sound when the player enters the trigger
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 }
-
